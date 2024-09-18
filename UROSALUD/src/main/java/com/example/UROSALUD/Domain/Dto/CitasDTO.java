@@ -20,7 +20,7 @@ public class CitasDTO {
 
     private  long id;
 
-    private Date fecha;
+    private String fecha;
 
     private EstadosCitas estadosCitas;
 
@@ -29,6 +29,8 @@ public class CitasDTO {
     private User doctor;
 
     private TiposCitas tiposCitas;
+
+    private String hora;
 
 
 

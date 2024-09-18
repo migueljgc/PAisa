@@ -21,7 +21,7 @@ public class Citas {
     private  long id;
 
     @Column(name = "Fecha")
-    private Date fecha;
+    private String fecha;
 
     @JoinColumn(name = "ID_Estado")
     @ManyToOne
@@ -38,6 +38,9 @@ public class Citas {
     @JoinColumn(name = "ID_TiposCitas")
     @ManyToOne
     private TiposCitas tiposCitas;
+
+    @Column(name = "Hora ")
+    private String hora;
 
 
 

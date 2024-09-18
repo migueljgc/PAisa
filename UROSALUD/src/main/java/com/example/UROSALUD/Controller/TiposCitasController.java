@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/TiposCitas/")
+@RequestMapping("/api/TiposCitas")
 public class TiposCitasController {
     @Autowired
     private TiposCitasService tiposCitasService;

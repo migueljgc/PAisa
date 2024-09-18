@@ -12,6 +12,7 @@ public class CitasMapper {
         citas.setPaciente(citasDTO.getPaciente());
         citas.setDoctor(citasDTO.getDoctor());
         citas.setTiposCitas(citasDTO.getTiposCitas());
+        citas.setHora(citasDTO.getHora());
         return citas;
     }
 
@@ -23,6 +24,7 @@ public class CitasMapper {
         citasDTO.setPaciente(citas.getPaciente());
         citasDTO.setDoctor(citas.getDoctor());
         citasDTO.setTiposCitas(citas.getTiposCitas());
+        citasDTO.setHora(citas.getHora());
         return citasDTO;
     }
 }

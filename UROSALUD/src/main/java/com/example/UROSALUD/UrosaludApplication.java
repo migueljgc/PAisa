@@ -13,15 +13,4 @@ public class UrosaludApplication {
 		SpringApplication.run(UrosaludApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer configuracionCORS() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedMethods("POST", "GET", "DELETE", "OPTIONS", "PUT");
-
-			}
-		};
-	}
 }
