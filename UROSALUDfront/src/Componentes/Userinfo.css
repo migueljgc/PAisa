@@ -1,0 +1,16 @@
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  
+  .profile-picture {
+    background-color: transparent;
+    border-radius: 20%;
+    margin-top: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+    font-size: 50px;
+    color: #ffffff;
+  }

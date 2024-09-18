@@ -1,0 +1,74 @@
+.Header {
+    background-color: #d7c3e2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "logo inicioheader Serviciosheader especialistasheader agendarcitaheader iconprofileheader";
+}
+
+.logo {
+    grid-area: logo;
+}
+.logo img {
+    margin-top: 5px;
+    width: 220px;
+    height: 50px;
+    margin-left: 30px;
+}
+
+.inicioheader {
+    grid-area: inicioheader;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.Serviciosheader {
+    grid-area: Serviciosheader;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.especialistasheader {
+    grid-area: especialistasheader;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.agendarcitaheader {
+    grid-area: agendarcitaheader;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.iconprofileheader {
+    grid-area: iconprofileheader;
+}
+a{
+    text-decoration: none;
+}
+.agendarcitaheader button{
+    font-size: 18px;
+    border-radius: 30px;
+    width: 160px;
+    height: 40px;
+    font-weight: bold;
+    background-color: pink;
+    border: 2px solid black;
+    cursor: pointer;
+}

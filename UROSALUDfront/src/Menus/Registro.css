@@ -1,0 +1,96 @@
+.Registro {
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 2.7fr 0.2fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "headerRegistro"
+        "registro"
+        "pieregistro";
+}
+
+.headerRegistro {
+    grid-area: headerRegistro;
+    background-color: #d7c3e2;
+    height: 90px;
+}
+
+.registro {
+    grid-area: registro;
+}
+
+.pieregistro {
+    grid-area: pieregistro;
+}
+
+.headerRegistro img {
+    margin-top: 5px;
+    width: 220px;
+    height: 80px;
+}
+
+.Registros {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2.7fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "registro1 registro2";
+}
+.formRegistro h1{
+    font-size: 50px;
+    display: flex;
+    justify-content: start;
+    margin-left: 20px;
+}
+.registro1 {
+    grid-area: registro1;
+}
+
+.registro2 {
+    grid-area: registro2;
+    
+}
+.labelsAndInputs{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    font-size: 18px;
+}
+.labelsAndInputs label {
+    margin-left: 20px;
+}
+.labelsAndInputs input, select{
+    margin-right: 20px;
+    width: 50%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #d6d8da;
+    border-radius: 8px;
+}
+.btnRegistrar {
+    margin-top: 40px;
+    margin-left: 90%;
+    margin-bottom: 30px;
+
+}
+
+.btnRegistrar button {
+    background-color: pink;
+    border: 0;
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.A {
+    margin-top: 90px;
+    margin-left: -65px;
+}
