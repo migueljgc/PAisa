@@ -22,12 +22,12 @@ const Login = () => {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (userData) {
                 const { role } = userData;
-                if (role === 'ADMIN') {
-                    navigate('/');
+                if (role === 'DOCTOR') {
+                    navigate('/HomePagesDoctor');
                 } else if (role === 'USER') {
                     navigate('/HomePages');
-                } else if (role === 'SECRE') {
-                    navigate('/');
+                } else if (role === 'SECRETARIA') {
+                    navigate('/HomePagesSecretaria');
                 }
             }
         }
@@ -61,13 +61,16 @@ const Login = () => {
                     return;
                 }
                 
-                if (authorities.includes('ADMIN')) {
-                    window.location.href = '/';
+                if (authorities.includes('DOCTOR')) {
+                    window.location.href = '/HomePagesDoctor';
                     localStorage.setItem('logget', true);
                 } else if (authorities.includes('USER')) {
                     window.location.href = '/HomePages';
                     localStorage.setItem('logget', true);
-                } else {
+                }  else if (authorities.includes('SECRETARIA')) {
+                    window.location.href = '/HomePagesSecretaria';
+                    localStorage.setItem('logget', true);
+                }else {
 
                     window.location.href = '/';
 

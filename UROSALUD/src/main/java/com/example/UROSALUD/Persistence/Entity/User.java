@@ -64,6 +64,8 @@ public class User implements UserDetails {
     private Especialidad especialidad;
 
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

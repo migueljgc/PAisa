@@ -8,7 +8,7 @@ const PiePagina = () => {
                 <label >+57 308 4512314</label>
             </div>
             <div className="PQRSContact">
-                <a href="">PQRSD </a>
+                <a href="/PQRS">PQRSD </a>
             </div>
             <div className="Copyrigth">
                 <label>Copyrigth @2024 </label>

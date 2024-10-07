@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Agendar = () => {
     const [tiposCitas, setTiposCitas] = useState([]);
+    const [horariosDisponibles, setHorariosDisponibles] = useState([]);
     const token = localStorage.getItem('token');
     const [doctors, setDoctors] = useState([]);
     const [minDate, setMinDate] = useState('');
@@ -17,9 +18,10 @@ const Agendar = () => {
         hora: '',
         doctor: '',
     });
+    
 
     useEffect(() => {
-        document.title = "Registro"
+        document.title = "Agendar Cita"
 
         const fetchTiposCitas = async () => {
             try {
@@ -32,6 +34,17 @@ const Agendar = () => {
                 console.error('Error al obtener tipos de identificación de la base de datos', error);
             }
         };
+
+       // Hacer la petición para obtener todos los usuarios
+       axios.get('/api/Usuario/get')
+       .then(response => {
+           // Filtrar los usuarios que tienen el rol "doctor"
+           const filteredDoctors = response.data.filter(usuario => usuario.role === 'DOCTOR');
+           setDoctors(filteredDoctors);
+           console.log(doctors)
+       })
+       .catch(error => console.error('Error fetching users:', error));
+
         const today = new Date().toISOString().split('T')[0];
         setMinDate(today);
 
@@ -40,17 +53,16 @@ const Agendar = () => {
         fetchTiposCitas();
 
     }, []);
+
     useEffect(() => {
-        // Hacer la petición para obtener todos los usuarios
-        axios.get('/api/Usuario/get')
-            .then(response => {
-                // Filtrar los usuarios que tienen el rol "doctor"
-                const filteredDoctors = response.data.filter(usuario => usuario.role === 'DOCTOR');
-                setDoctors(filteredDoctors);
-                console.log(doctors)
-            })
-            .catch(error => console.error('Error fetching users:', error));
-    }, []);
+        if (formData.doctor) {
+            // Fetch horarios disponibles del doctor seleccionado
+            axios.get(`/api/Citas/doctor/${formData.doctor}`)
+                .then(response => setHorariosDisponibles(response.data))
+                .catch(error => console.error('Error al obtener horarios:', error));
+        }
+    }, [formData.doctor]);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -61,7 +73,7 @@ const Agendar = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        alert('Cita registrada exitosamente.');
+        try{
             // Solicitud para obtener el ID del paciente autenticado
             const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
@@ -70,11 +82,12 @@ const Agendar = () => {
             });
         
             if (response1.status === 200) {
+                alert('Cita registrada exitosamente.');
                 const user = response1.data.id;
                 console.log(user);
         
                 // Registro de la cita
-                const userResponse = await axios.post('http://localhost:8080/api/Citas/save', {
+                const CitaResponse = await axios.post('http://localhost:8080/api/Citas/save', {
                     fecha: formData.fecha,
                     estadosCitas: { id: 1 || '' },
                     doctor: { id: parseInt(formData.doctor, 10) || '' },
@@ -83,10 +96,14 @@ const Agendar = () => {
                     paciente: { id: user || '' }
                 });
                 
-                console.error('usuario', userResponse);
+                console.log('usuario', CitaResponse);
             } else {
                 console.error('Error al autenticar al usuario');
             }
+
+        } catch (error) {
+            console.error('Error al reservar la cita:', error);
+        }
        
     };
 
@@ -103,17 +120,18 @@ const Agendar = () => {
 
                         <div className="datosagendar">
                             <div className="labelsAndInputs">
-                                <label >Seleccionar Tipo de cita</label>
-                                <select className='Selects'
+                            <label>Seleccionar Tipo de Cita</label>
+                                <select
                                     id="TiposCitas"
                                     name="TiposCitas"
                                     value={formData.TiposCitas}
-                                    onChange={handleChange} required
+                                    onChange={handleChange}
+                                    required
                                 >
-                                    <option key="" value="">Seleccione Tipo de Identificación</option>
-                                    {tiposCitas.map((type) => (
-                                        <option key={type.id} value={type.id}>
-                                            {type.descripcion}
+                                    <option value="">Seleccione Tipo de Cita</option>
+                                    {tiposCitas.map((tipo) => (
+                                        <option key={tipo.id} value={tipo.id}>
+                                            {tipo.descripcion}
                                         </option>
                                     ))}
                                 </select>
@@ -129,15 +147,21 @@ const Agendar = () => {
                                     onChange={handleChange} required />
                             </div>
                             <div className="labelsAndInputs">
-                                <label >Seleccionar Hora</label>
-                                <input className='inputs'
-                                    type="time"
+                            <label>Seleccionar Hora</label>
+                                <select
                                     id="hora"
                                     name="hora"
-                                    min={minTime}
-                                    max={maxTime}
                                     value={formData.hora}
-                                    onChange={handleChange} required />
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Seleccione la Hora</option>
+                                    {horariosDisponibles.map(horario => (
+                                        <option key={horario.hora} value={horario.hora}>
+                                            {horario.hora} (Citas disponibles: {horario.citasDisponibles})
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="labelsAndInputs">
                                 <label >Seleccionar Doctor Disponible</label>

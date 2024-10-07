@@ -31,7 +31,8 @@ import java.util.List;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(csrf ->csrf.disable())
+        httpSecurity
+                .csrf(csrf ->csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilitar CORS
                 .authorizeHttpRequests(auth -> auth.requestMatchers(publicEndpoinds()).permitAll()
                         .anyRequest().authenticated())
@@ -59,7 +60,9 @@ import java.util.List;
           new AntPathRequestMatcher("/api/greeting/sayHelloPublic"),
                 new AntPathRequestMatcher("/api/auth/**"),
                 new AntPathRequestMatcher("/api/TiposIdentificacion/get"),
-                new AntPathRequestMatcher("/api/Genero/get")
+                new AntPathRequestMatcher("/api/Genero/get"),
+                new AntPathRequestMatcher("/Pqrs/save"),
+                new AntPathRequestMatcher("/api/tipoSolicitud/**")
 
         );
     }

@@ -1,15 +1,14 @@
 .Agendar {
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 2.6fr 0.2fr;
+    grid-template-columns: 0.3fr 1.7fr;
+    grid-template-rows: 1.9fr 0.1fr;
     grid-auto-columns: 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-        "headeragendar"
-        "agendar"
-        "pieagendar";
+        "headeragendar agendar"
+        "pieagendar pieagendar";
 }
 
 .headeragendar {
@@ -22,6 +21,8 @@
 
 .pieagendar {
     grid-area: pieagendar;
+    background-color: pink;
+    height: 6vh;
 }
 
 .agendarcita {
@@ -37,6 +38,9 @@
 
 .datosagendar {
     grid-area: datosagendar;
+    margin-top: 40px;
+    margin-left: 30px;
+    
 }
 
 .btnagendar {
@@ -46,6 +50,7 @@
     font-size: 40px;
     justify-content: start;
     margin-left: 50px;
+    margin-top: 70px;
 }
 .btnagendar{
     display: flex;

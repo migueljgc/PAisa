@@ -107,7 +107,7 @@ const Registro = () => {
             const selectedIdentificationType = identificationTypes.find(type => type.id === parseInt(formData.tipoIdentificacion));
             const selectedGenerosType = generosTypes.find(type => type.id === parseInt(formData.genero));
             if (formData.contraseña === formData.confirmarContraseña) {
-                const userResponse = await axios.post('http://localhost:8080/api/auth/register', {
+                const userResponse = await axios.post('http://localhost:8080/api/auth/registerUser', {
                     name: formData.nombre,
                     lastName: formData.apellido,
                     email: formData.correo,

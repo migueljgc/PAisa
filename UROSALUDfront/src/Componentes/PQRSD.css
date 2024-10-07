@@ -1,0 +1,87 @@
+.PQRSD {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2.9fr 0.1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "PQRSDpage"
+        "piePQRSD";
+}
+
+.PQRSDpage {
+    grid-area: PQRSDpage;
+}
+
+.piePQRSD {
+    grid-area: piePQRSD;
+
+}
+.datosPQRSD h2{
+    margin-top: 50px;
+    margin-left: 30px;
+    font-size: 40px;
+
+}
+.frompqrsd{
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.tipoandfecha{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tipospqrs select{
+    width: 200px;
+    margin-left: 30px;
+    height: 30px;
+}
+
+.fechapqrs input{
+    width: 200px;
+    margin-left: 30px;
+    border-radius: 8px;
+    height: 30px;
+}
+
+.descripcionpqrs{
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+.descripcionpqrs label{
+    margin-right: 20px;
+}
+.descripcionpqrs textarea{
+    width: 500px;
+    height: 200px;
+    font-size: 17px;
+    border-radius: 6px;
+    border: 1px solid pink;
+}
+.descripcionpqrs textarea:hover{
+    background: pink;
+    
+}
+.btnpqrs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+}
+
+.btnpqrs button {
+    background-color: pink;
+    border: 0;
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
