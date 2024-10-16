@@ -1,0 +1,79 @@
+.CrearServicio {
+    height: 100vh;
+
+}
+
+.cuerpoServicio {
+    display: flex;
+}
+
+.pieServicio {
+    background-color: pink;
+    height: 6vh;
+}
+
+.form-crear-servicio {
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+}
+
+.crear-servicio-form {
+    width: 100%;
+    margin-left: 50px;
+}
+
+.crear-servicio-form h2 {
+    font-size: 3rem;
+
+}
+
+.input-box-crear-servicio {
+
+    font-size: 1.5rem;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-box-crear-servicio input,
+textarea {
+    margin-right: 150px;
+    width: 60%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #d6d8da;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
+
+.input-file-crear-servicio input {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-top: 30px;
+    width: 90%;
+    height: 50px;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #d6d8da;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
+
+.btn-crear-servicio {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.btn-crear-servicio button {
+    background-color: pink;
+    border: 0;
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}

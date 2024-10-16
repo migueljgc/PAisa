@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import '../Usuario/Agendar.css'
-import { Header } from '../../Componentes/Header';
+import { Acceso, Header } from '../../Componentes/Header';
 import PiePagina from '../../Componentes/PiePagina';
 import axios from 'axios';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Agendar = () => {
     const [tiposCitas, setTiposCitas] = useState([]);
+    const [showMenu, setShowMenu] = useState(false);
     const [horariosDisponibles, setHorariosDisponibles] = useState([]);
     const token = localStorage.getItem('token');
     const [doctors, setDoctors] = useState([]);
     const [minDate, setMinDate] = useState('');
-    const minTime = '08:00';
-    const maxTime = '17:00';
     const [formData, setFormData] = useState({
         TiposCitas: '',
         fecha: '',
@@ -19,7 +19,9 @@ const Agendar = () => {
         doctor: '',
     });
     
-
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
     useEffect(() => {
         document.title = "Agendar Cita"
 
@@ -110,9 +112,19 @@ const Agendar = () => {
 
     return (
         <div className="Agendar">
-            <div className="headeragendar">
-                <Header />
-            </div>
+            <Acceso/>
+            {/* Span para abrir el menú con icono de 3 líneas */}
+            <span onClick={toggleMenu} className="menu-icon">
+                {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+            </span>
+
+
+            {/* Mostrar el menú Header solo si showMenu es true */}
+            {showMenu && (
+                <div className="menuAgendar">
+                    <Header />
+                </div>
+            )}
             <div className="agendar">
                 <h1>Agendar Cita</h1>
                 <form onSubmit={handleSubmit}>

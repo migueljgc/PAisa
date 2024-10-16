@@ -1,0 +1,203 @@
+.recovery {
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 0.8fr 1.5fr;
+    grid-template-rows: 1.9fr 0.1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "logo-recovery reco"
+        "pie pie";
+}
+
+.reco {
+    grid-area: reco;
+    backdrop-filter: blur(12px); /* Efecto de desenfoque */
+    padding: 40px;
+    border-radius: 15px;
+    color: #E6E8EC; /* Texto blanco-gris para mayor contraste */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8); /* Sombras negras más intensas */
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.logo-recovery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: logo-recovery;
+    width: 100%;
+    max-width: 600px;
+    border-right: 2px solid black;
+}
+.logo-recovery img{
+    width: 600px;
+}
+.pie {
+    grid-area: pie;
+}
+
+.logologin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: logologin;
+    border-right: 1px solid black;
+}
+
+.reco h2,
+.reco label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+/* Flexbox para input-box2 */
+.input-box2 {
+    display: flex;
+    /* Cambiar a flexbox */
+    align-items: center;
+    /* Alinear verticalmente */
+    margin-bottom: 20px;
+    /* Espacio entre los inputs */
+}
+
+.input-box2 label {
+    margin-right: 0.8rem;
+    /* Espacio a la derecha de la etiqueta */
+}
+
+.input-box2 input {
+    border: none;
+    color: #000;
+    font-size: 1rem;
+    /* Cambiado a unidad relativa */
+    border-bottom: 2px solid #fff;
+    outline: none;
+    background: #d6d8da;
+    width: 100%;
+    /* Ancho completo */
+    padding: 10px 0;
+    /* Espaciado vertical */
+    transition: border-color 0.3s ease;
+}
+
+.input-box2 input:focus {
+    border-bottom: 2px solid #5E76FF;
+    /* Cambiar el color de la línea al enfocar */
+}
+
+/* Botón */
+.btnSolicitar {
+    display: flex;
+    /* Habilitar flexbox */
+    justify-content: center;
+    /* Centrar horizontalmente */
+    margin-top: 10px;
+    /* Espacio superior para separación */
+}
+
+.btnSolicitar button {
+    background-color: pink;
+    /* Color de fondo inicial (naranja) */
+    color: white;
+    /* Color del texto */
+    border: none;
+    /* Sin borde */
+    padding: 6px 12px;
+    /* Espaciado interno más pequeño */
+    font-weight: bold;
+    /* Negrita */
+    cursor: pointer;
+    /* Cambiar cursor al pasar por encima */
+    border-radius: 6px;
+    /* Bordes redondeados más sutiles */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Transiciones suaves */
+    width: 50%;
+    /* Ancho relativo */
+    font-size: 1rem;
+    /* Cambiado a unidad relativa */
+}
+
+.btnSolicitar button:hover {
+    background-color: #1C285A;
+    /* Cambiar a azul al pasar el mouse */
+}
+
+.btnSolicitar button:active {
+    background-color: #4753c8;
+    /* Cambiar a un azul más oscuro al presionar */
+    transform: translateY(0);
+    /* Reiniciar la posición al hacer clic */
+}
+
+.PAndA {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+.PAndA p {
+    color: #000;
+}
+
+.PAndA a {
+    color: pink;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.PAndA a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .reco {
+        width: 90%;
+        /* Aumentar ancho en pantallas más pequeñas */
+        padding: 20px;
+        /* Reducir padding */
+    }
+
+    .input-box2 input {
+        font-size: 0.9rem;
+        /* Reducir tamaño de fuente en móviles */
+    }
+
+    .btnSolicitar button {
+        font-size: 0.9rem;
+        /* Reducir tamaño de fuente en móviles */
+        padding: 5px 10px;
+        /* Ajustar padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .reco {
+        padding: 15px;
+        /* Reducir aún más el padding en pantallas muy pequeñas */
+    }
+
+    .input-box2 input {
+        font-size: 0.8rem;
+        /* Reducir aún más el tamaño de fuente */
+    }
+
+    .btnSolicitar button {
+        font-size: 0.8rem;
+        /* Reducir aún más el tamaño de fuente */
+        padding: 4px 8px;
+        /* Ajustar padding */
+    }
+}

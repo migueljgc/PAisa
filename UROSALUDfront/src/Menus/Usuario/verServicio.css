@@ -1,0 +1,147 @@
+.VerServicios {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.3fr 1.7fr;
+    grid-template-rows: 1.9fr 0.1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "headerVerServicio cuerpo-ver-Servicio"
+        "pieCrearServicio pieCrearServicio";
+}
+
+.pieCrearServicio {
+    grid-area: pieCrearServicio;
+    background-color: pink;
+    height: 6vh;
+}
+
+.headerVerServicio {
+    grid-area: headerVerServicio;
+}
+
+.cuerpo-ver-Servicio {
+    grid-area: cuerpo-ver-Servicio;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+
+.ver-servicio {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.servicio-container {
+    padding: 20px;
+    text-align: center;
+    max-width: 1200px;
+    /* Limita el ancho máximo */
+    width: 100%;
+    /* Ajusta el ancho al contenedor */
+}
+
+
+/* Resto de tus estilos tal como estaban */
+
+.servicio-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.servicio-container p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.servicio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas */
+    gap: 20px;
+    /* Espacio entre las tarjetas */
+}
+
+.servicio-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.servicio-card:hover {
+    transform: scale(1.05);
+}
+
+.servicio-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.servicio-nombre {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.modal-imagen {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+}

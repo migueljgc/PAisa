@@ -18,8 +18,12 @@
     align-items: center;
     grid-area: logologin;
     border-right: 1px solid black;
+    width: 100%;
+    max-width: 600px;
 }
-
+.logologin img{
+    width: 600px;
+}
 .iniciologin {
     grid-area: iniciologin;
     display: flex;

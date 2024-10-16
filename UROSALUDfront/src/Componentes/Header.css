@@ -78,3 +78,23 @@ body{
     transition: height .4s;
     height: 0;
 }
+/* Icono de "X" para cerrar el menú en Header */
+
+.close-menu {
+    
+    cursor: pointer;
+    z-index: 1001;
+    color: #333;
+}
+.menu {
+    width: 100%;
+    background-color: none;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    width: 20vh;
+}

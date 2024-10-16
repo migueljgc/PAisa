@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Configurar la URL base si es necesario
-axios.defaults.baseURL = 'http://localhost:8080'; // Ajusta esto según tu configuración
+axios.defaults.baseURL = 'http://localhost:8080/'; // Ajusta esto según tu configuración
 
 // Interceptor de solicitudes para agregar el token JWT
 axios.interceptors.request.use(

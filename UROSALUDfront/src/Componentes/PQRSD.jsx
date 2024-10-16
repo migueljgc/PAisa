@@ -4,7 +4,6 @@ import './PQRSD.css'
 import axios from 'axios';
 
 const PQRSD = () => {
-    const [data, setData] = useState('');
     const [tiposSoli, setTiposSoli] = useState([]);
     const [formData, setFormData] = useState({
         fechaHora: '',

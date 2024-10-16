@@ -1,58 +1,107 @@
-.HomePage {
+.menuHomepage {
+    width: 100%;
+    background-color: none;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 0.3fr 1.7fr;
-    grid-template-rows: 1.9fr 0.1fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "headerHomepage homepage"
-        "pieHomePage pieHomePage";
+    z-index: 999;
+    width: 20vh;
 }
-
-.headerHomepage {
-    grid-area: headerHomepage;
+.HomePage{
+    height: 100vh;
 }
 
 .homepage {
-    grid-area: homepage;
+    display: flex;
+    justify-content: center;
+    /* Centramos horizontalmente */
+    align-items: center;
+    /* Centramos verticalmente */
+    width: 100%;
+    height: 70vh;
 }
 
 .pieHomePage {
-    grid-area: pieHomePage;
     background-color: pink;
     height: 6vh;
 }
 
-.homepage {
-    display: grid;
-    grid-template-columns: 0.8fr 1fr;
-    grid-template-rows: 1fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "datoshomepage imghomepage";
+.headerHomePage {
+    background-color: #d7c3e2;
+    height: 70px;
+    display: flex;
 }
 
-.datoshomepage {
-    grid-area: datoshomepage;
+.headerHomePage img {
+    margin-top: 5px;
+    margin-left: 70px;
+    width: 200px;
+    height: 60px;
+}
+
+.servicio-HomePage {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-left: 100px;
+
+}
+
+.servicio-HomePage-button {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.servicio-HomePage-link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+/* Icono de menú (tres líneas) en HomePage */
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    color: #333;
+}
+.swiper-container {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    max-width: 80vw;
+    /* Para que no se extienda demasiado */
+    max-height: 70vh;
+    /* Ajustamos el alto máximo */
     display: flex;
     justify-content: center;
+    /* Alineación horizontal dentro del contenedor */
     align-items: center;
-    text-align: center;
-    font-size: 25px;
-    margin-left: 60px;
-    margin-right: 60px;
+    /* Alineación vertical dentro del contenedor */
+    overflow: hidden;
+    /* Evitar que las imágenes salgan del contenedor */
+    margin-top: 30px;
 }
 
-.imghomepage {
-    grid-area: imghomepage;
+.swiper img {
+    width: 100%;
+    /* La imagen ocupa todo el ancho del contenedor */
+    height: 100%;
+    /* Mantiene la relación de aspecto */
+    
+    max-height: 100%;
+    /* Asegura que la imagen no exceda el alto del contenedor */
 }
-
-.imghomepage img {
-    margin-bottom: -10px;
-    height: 94vh;
+.ver-servicio-home {
+    display: flex;
+    justify-content: center;
     width: 100%;
 }

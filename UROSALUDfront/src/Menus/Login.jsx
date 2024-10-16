@@ -27,7 +27,7 @@ const Login = () => {
                 } else if (role === 'USER') {
                     navigate('/HomePages');
                 } else if (role === 'SECRETARIA') {
-                    navigate('/HomePagesSecretaria');
+                    navigate('/HomePagesAdmin');
                 }
             }
         }
@@ -68,7 +68,7 @@ const Login = () => {
                     window.location.href = '/HomePages';
                     localStorage.setItem('logget', true);
                 }  else if (authorities.includes('SECRETARIA')) {
-                    window.location.href = '/HomePagesSecretaria';
+                    window.location.href = '/HomePagesAdmin';
                     localStorage.setItem('logget', true);
                 }else {
 
@@ -92,7 +92,7 @@ const Login = () => {
     return (
         <div className="Login">
             <div className="logologin">
-                <img src="/Logo - Urosalud_20240917_141636_0000.png" alt="Logo" />
+                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
             </div>
             <div className="iniciologin">
                 <form className='formLogin' onSubmit={onLogin}>
@@ -109,7 +109,7 @@ const Login = () => {
                             <input  type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder='Ingrese su contraseña' />
                         </div>
 
-                        <a href="">¿Haz olvidado tu contraseña?</a>
+                        <a href="/Recuperacion">¿Haz olvidado tu contraseña?</a>
 
                         <div className="btnlogin">
                             <button type="submit">Inicia sesion</button>
