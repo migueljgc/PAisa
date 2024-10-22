@@ -42,6 +42,12 @@ public class Citas {
     @Column(name = "Hora ")
     private String hora;
 
+    @Lob
+    @Column(name = "Archivo_Historia_Clinica")
+    private String archivoAnswerHistoria;
 
+    @Lob
+    @Column(name = "Archivo_Historia_Medica")
+    private String archivoAnswerMedica;
 
 }

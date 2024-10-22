@@ -1,8 +1,5 @@
 package com.example.UROSALUD.Domain.Dto;
-import com.example.UROSALUD.Persistence.Entity.Especialidad;
-import com.example.UROSALUD.Persistence.Entity.Genero;
-import com.example.UROSALUD.Persistence.Entity.Role;
-import com.example.UROSALUD.Persistence.Entity.TiposIdentificacion;
+import com.example.UROSALUD.Persistence.Entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

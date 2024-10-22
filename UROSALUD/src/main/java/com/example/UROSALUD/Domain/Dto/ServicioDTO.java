@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class EspecialidadDTO {
+public class ServicioDTO {
 
     private  long id;
 
     private String nombre;
 
     private String descripcion;
+
+    private byte[] img;
 }

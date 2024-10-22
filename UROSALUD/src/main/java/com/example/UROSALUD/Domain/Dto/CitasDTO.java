@@ -32,6 +32,9 @@ public class CitasDTO {
 
     private String hora;
 
+    private String archivoAnswerHistoria;
+
+    private String archivoAnswerMedica;
 
 
 }

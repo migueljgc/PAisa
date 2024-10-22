@@ -2,10 +2,7 @@ package com.example.UROSALUD.Controller.models;
 
 
 
-import com.example.UROSALUD.Persistence.Entity.Especialidad;
-import com.example.UROSALUD.Persistence.Entity.Genero;
-import com.example.UROSALUD.Persistence.Entity.Role;
-import com.example.UROSALUD.Persistence.Entity.TiposIdentificacion;
+import com.example.UROSALUD.Persistence.Entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

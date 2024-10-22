@@ -31,6 +31,9 @@ public class User implements UserDetails {
     @Column(name = "Apellido_Persona")
     private String lastName;
 
+    @Column(name = "Correo")
+    private String email;
+
     @JoinColumn(name = "ID_Genero")
     @ManyToOne
     private Genero genero;
@@ -62,6 +65,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "ID_Especialidad")
     @ManyToOne
     private Especialidad especialidad;
+
+
 
 
     @Override
