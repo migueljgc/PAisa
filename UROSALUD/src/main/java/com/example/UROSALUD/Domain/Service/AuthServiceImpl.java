@@ -7,7 +7,6 @@ import com.example.UROSALUD.Persistence.Entity.Role;
 import com.example.UROSALUD.Persistence.Entity.User;
 import com.example.UROSALUD.Persistence.Repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,9 +31,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private HorarioService horarioService;
-
 
     @Override
     public AuthResponse register(RegisterRequest request) {
@@ -53,11 +49,6 @@ public class AuthServiceImpl implements AuthService {
                 .number(request.getNumber())
                 .build();
         userRepository.save(user);
-        // Generar los horarios si el rol es doctor
-
-            // Llamar al servicio de generación de horarios
-            horarioService.generarHorariosParaDoctor(user.getId());
-
         var jwtToken = jwtService.genereteToken((UserDetails) user);
 
         return AuthResponse.builder()

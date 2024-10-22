@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../Menus/Registro.css'
 import PiePagina from '../Componentes/PiePagina';
 import axios from 'axios';
+import { FaHouse } from 'react-icons/fa6';
+import { MdOutlineHouse } from 'react-icons/md';
+import { BsHouse } from 'react-icons/bs';
 
 const Registro = () => {
     const [passwordError, setPasswordError] = useState('');
@@ -140,117 +143,135 @@ const Registro = () => {
     return (
         <div class="Registro">
             <div class="headerRegistro">
-                <img src="/Logo - Urosalud_20240917_141636_0001.png" alt="Logo" />
+                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+                <div className="header-registro-datos">
+                    <li className="inicio-Registro">
+                        <div className="header-Registro-button">
+                            <BsHouse className='icon-house'/>
+                            <a href="/inicio" className="inicio-Registro-link">Inicio</a>
+                        </div>
+                    </li>
+                    <li className="inicio-Registro">
+                        <div className="header-Registro-button">
+                            <a href="/Login" className="inicio-Registro-link">Iniciar Sesion</a>
+                        </div>
+                    </li>
+                </div>
+
             </div>
             <div class="registro">
                 <form className='formRegistro' onSubmit={handleSubmit}>
-                    <h1>
-                        Registro
-                    </h1>
-                    <div class="Registros">
-                        <div class="registro1">
-                            <div className="labelsAndInputs">
-                                <label >Nombre</label>
-                                <input type="text"
-                                    id="nombre"
-                                    name="nombre"
-                                    value={formData.nombre}
-                                    onChange={handleChange} required />
+                    <div className="datos-registros">
+                        <h1>
+                            Registro
+                        </h1>
+                        <div class="Registros">
+                            <div class="registro1">
+                                <div className="labelsAndInputs">
+                                    <label >Nombre</label>
+                                    <input type="text"
+                                        id="nombre"
+                                        name="nombre"
+                                        value={formData.nombre}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Tipo de Documento</label>
+                                    <select className='Selects'
+                                        id="tipoIdentificacion"
+                                        name="tipoIdentificacion"
+                                        value={formData.tipoIdentificacion}
+                                        onChange={handleChange} required
+                                    >
+                                        <option key="" value="">Seleccione Tipo de Identificación</option>
+                                        {identificationTypes.map((type) => (
+                                            <option key={type.id} value={type.id}>
+                                                {type.descripcion}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Correo</label>
+                                    <input type="email"
+                                        id="correo"
+                                        name="correo"
+                                        value={formData.correo}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Genero</label>
+                                    <select className='Selects'
+                                        id="genero"
+                                        name="genero"
+                                        value={formData.genero}
+                                        onChange={handleChange} required
+                                    >
+                                        <option key="" value="">Seleccione el Genero</option>
+                                        {generosTypes.map((type) => (
+                                            <option key={type.id} value={type.id}>
+                                                {type.descricion}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Contraseña</label>
+                                    <input type="password"
+                                        id="contraseña"
+                                        name="contraseña"
+                                        value={formData.contraseña}
+                                        onChange={handleChange} required
+                                    />
+                                    {passwordError && <div className='errore'> {passwordError}</div>}
+                                </div>
+
                             </div>
-                            <div className="labelsAndInputs">
-                                <label >Cedula</label>
-                                <input type="number" 
-                                id="identificacion"
-                                name="identificacion"
-                                value={formData.identificacion}
-                                onChange={handleChange} required/>
+                            <div class="registro2">
+                                <div className="labelsAndInputs">
+                                    <label >Apellido</label>
+                                    <input type="text"
+                                        id="apellido"
+                                        name="apellido"
+                                        value={formData.apellido}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Numero Documento</label>
+                                    <input type="number"
+                                        id="identificacion"
+                                        name="identificacion"
+                                        value={formData.identificacion}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Telefono</label>
+                                    <input type="number"
+                                        id="numero"
+                                        name="numero"
+                                        value={formData.numero}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Direccion</label>
+                                    <input type="text"
+                                        id="direccion"
+                                        name="direccion"
+                                        value={formData.direccion}
+                                        onChange={handleChange} required />
+                                </div>
+                                <div className="labelsAndInputs">
+                                    <label >Confirmar contraseña</label>
+                                    <input type="password"
+                                        id="confirmarContraseña"
+                                        name="confirmarContraseña"
+                                        value={formData.confirmarContraseña}
+                                        onChange={handleChange} required
+                                    />
+                                    {confirmPasswordError && <div className='errore'> {confirmPasswordError}</div>}
+                                </div>
                             </div>
-                            <div className="labelsAndInputs">
-                                <label >Telefono</label>
-                                <input type="number"
-                                    id="numero"
-                                    name="numero"
-                                    value={formData.numero}
-                                    onChange={handleChange} required />
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Contraseña</label>
-                                <input type="password"
-                                    id="contraseña"
-                                    name="contraseña"
-                                    value={formData.contraseña}
-                                    onChange={handleChange} required
-                                />
-                                {passwordError && <div className='errore'> {passwordError}</div>}
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Confirmar contraseña</label>
-                                <input type="password"
-                                    id="confirmarContraseña"
-                                    name="confirmarContraseña"
-                                    value={formData.confirmarContraseña}
-                                    onChange={handleChange} required
-                                />
-                                {confirmPasswordError && <div className='errore'> {confirmPasswordError}</div>}
-                            </div>
-                        </div>
-                        <div class="registro2">
-                            <div className="labelsAndInputs">
-                                <label >Apellido</label>
-                                <input type="text"
-                                    id="apellido"
-                                    name="apellido"
-                                    value={formData.apellido}
-                                    onChange={handleChange} required />
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Tipo de identificacion</label>
-                                <select className='Selects'
-                                    id="tipoIdentificacion"
-                                    name="tipoIdentificacion"
-                                    value={formData.tipoIdentificacion}
-                                    onChange={handleChange} required
-                                >
-                                    <option key="" value="">Seleccione Tipo de Identificación</option>
-                                    {identificationTypes.map((type) => (
-                                        <option key={type.id} value={type.id}>
-                                            {type.descripcion}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Correo</label>
-                                <input type="email"
-                                    id="correo"
-                                    name="correo"
-                                    value={formData.correo}
-                                    onChange={handleChange} required />
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Direccion</label>
-                                <input type="text" 
-                                id="direccion"
-                                name="direccion"
-                                value={formData.direccion}
-                                onChange={handleChange} required/>
-                            </div>
-                            <div className="labelsAndInputs">
-                                <label >Genero</label>
-                                <select className='Selects'
-                                    id="genero"
-                                    name="genero"
-                                    value={formData.genero}
-                                    onChange={handleChange} required
-                                >
-                                    <option key="" value="">Seleccione el Genero</option>
-                                    {generosTypes.map((type) => (
-                                        <option key={type.id} value={type.id}>
-                                            {type.descricion}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+
                         </div>
                         <div className="btnRegistrar">
                             <button>CREAR CUENTA</button>
@@ -259,6 +280,7 @@ const Registro = () => {
                             <a href="/Login">¿Tienes una Cuenta?</a>
                         </div>
                     </div>
+
                 </form>
             </div>
             <div class="pieregistro">

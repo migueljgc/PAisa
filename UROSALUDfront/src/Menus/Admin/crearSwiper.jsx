@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './crearSwiper.css'
 import PiePagina from '../../Componentes/PiePagina';
-import { HeaderSecretaria } from '../../Componentes/Header';
+import { AccesoAdmin, HeaderSecretaria } from '../../Componentes/Header';
 import axios from 'axios';
 
 const CrearSwiper = () => {
@@ -73,8 +73,8 @@ const CrearSwiper = () => {
     }
     return (
         <div className='CrearSwiper'>
+            <AccesoAdmin />
             <div className="cuerpoSwiper">
-                <HeaderSecretaria />
                 <div className="form-crear-Swiper">
                     <form className='crear-Swiper-form' onSubmit={handleChange}>
                         <h2>

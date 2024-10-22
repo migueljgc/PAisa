@@ -5,17 +5,18 @@
 
 .cuerpoSwiper {
     display: flex;
+    height: 81.5vh;
 }
 
 .pieSwiper {
     background-color: pink;
-    height: 6vh;
+    height: 8vh;
 }
 
 .form-crear-Swiper {
     width: 100%;
     display: flex;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .crear-Swiper-form {

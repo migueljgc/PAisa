@@ -13,19 +13,23 @@
 
 .telefonoContact {
     margin-left: 30px;
-    margin-top: 10px;
     grid-area: telefonoContact;
+    display: flex;
+    align-items: center;
     
 }
 
 .PQRSContact {
-    margin-left: 30px;
-    margin-top: 10px;
+    margin-left: 70px;
     grid-area: PQRSContact;
+    display: flex;
+    align-items: center;
 }
 
 .Copyrigth {
-    margin-left: 30px;
-    margin-top: 10px;
+    margin-right: 30px;
     grid-area: Copyrigth;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }

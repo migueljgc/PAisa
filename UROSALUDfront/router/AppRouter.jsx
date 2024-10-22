@@ -4,7 +4,7 @@ import { ProtectedRoute } from '../router/ProtectedRoute';
 import { Navbar } from '../Navbar'
 import Login from '../src/Menus/Login';
 import Registro from '../src/Menus/Registro';
-import { HomePage, HomePageDoctor, HomePageSecretaria } from '../src/Menus/HomePage';
+import { HomePage, HomePageDoctor, HomePageInicio, HomePageSecretaria } from '../src/Menus/HomePage';
 import Agendar from '../src/Menus/Usuario/Agendar';
 import PQRSD from '../src/Componentes/PQRSD.JSX';
 import CrearServicio from '../src/Menus/Admin/crearServicio';
@@ -22,7 +22,8 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Navbar />}>
-        <Route index element={<Login />} />
+        <Route index element={<HomePageInicio />} />
+        <Route path="/inicio" element={<HomePageInicio />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Recuperacion" element={<Recovery/>} />
         <Route path="/Registro" element={<Registro />} />

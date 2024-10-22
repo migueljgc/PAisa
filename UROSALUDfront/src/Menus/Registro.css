@@ -1,5 +1,6 @@
 .Registro {
     font-family: 'Montserrat', sans-serif;
+    background-color: white;
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
@@ -16,7 +17,9 @@
 .headerRegistro {
     grid-area: headerRegistro;
     background-color: #d7c3e2;
-    height: 90px;
+    height: 70px;
+    display: flex;
+    
 }
 
 .registro {
@@ -28,9 +31,48 @@
 }
 
 .headerRegistro img {
+    display: flex;
     margin-top: 5px;
-    width: 220px;
-    height: 80px;
+    width: 200px;
+    height: 60px;
+    margin-left: 100px;
+}
+.header-registro-datos{
+    display: flex;
+    justify-content: end;
+    width: 60%;
+}
+.inicio-Registro {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-left: 200px;
+
+}
+
+.inicio-Registro-button {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.inicio-Registro-link {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+}
+.formRegistro{
+    display: flex;
+    justify-content: center;
+}
+
+.formRegistro h1{
+    font-size: 50px;
+    justify-content: start;
+    margin-top: 20px;
 }
 
 .Registros {
@@ -38,16 +80,10 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 2.7fr;
     grid-auto-columns: 1fr;
-    gap: 0px 0px;
+    gap: 0px 100px;
     grid-auto-flow: row;
     grid-template-areas:
         "registro1 registro2";
-}
-.formRegistro h1{
-    font-size: 50px;
-    display: flex;
-    justify-content: start;
-    margin-left: 20px;
 }
 .registro1 {
     grid-area: registro1;
@@ -58,26 +94,23 @@
     
 }
 .labelsAndInputs{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 15px;
     font-size: 18px;
 }
-.labelsAndInputs label {
-    margin-left: 20px;
-}
+
 .labelsAndInputs input, select{
-    margin-right: 20px;
-    width: 50%;
+    margin-top: 8px;
+    width: 100%;
     border-radius: 8px;
     border: 0px;
     background-color: #d6d8da;
     border-radius: 8px;
+    padding: 8px 0px 8px 10px;
 }
 .btnRegistrar {
-    margin-top: 40px;
-    margin-left: 90%;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 
 }
 
@@ -91,6 +124,10 @@
     font-weight: bold;
 }
 .A {
-    margin-top: 90px;
-    margin-left: -65px;
+    display: flex;
+    justify-content: end;
+}
+.icon-house{
+    font-size: 25px;
+    margin-right: 5px;
 }

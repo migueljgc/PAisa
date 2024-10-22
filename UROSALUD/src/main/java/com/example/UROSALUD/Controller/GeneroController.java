@@ -17,7 +17,6 @@ public class GeneroController {
 
     @PostMapping("/save")
     public GeneroDTO save(@RequestBody GeneroDTO generoDTO){
-
         return generoService.save(generoDTO);
     }
 

@@ -22,8 +22,37 @@
     /* Centramos verticalmente */
     width: 100%;
     height: 70vh;
+    
 }
+.homepage-secre {
+    display: flex;
+    justify-content: center;
+    /* Centramos horizontalmente */
+    width: 100%;
+    height: 50vh;
+    
+}
+.ver-conocenos-secre{
+    display: flex;
+    justify-content: center;
+    height: 33.5vh;
 
+}
+.conocenos-content-secre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.conocenos-content-secre p{
+    font-size: 18px;
+    color: #555555; /* Color del texto */
+    line-height: 1.6;
+    max-width: 800px;
+    text-align: left;
+    margin-bottom: 40px;
+}
 .pieHomePage {
     background-color: pink;
     height: 6vh;
@@ -33,6 +62,14 @@
     background-color: #d7c3e2;
     height: 70px;
     display: flex;
+}
+.texto-inicio{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+.texto-inicio h2{
+    font-size: 2rem;
 }
 
 .headerHomePage img {
@@ -54,13 +91,13 @@
     display: flex;
     align-items: center;
     gap: 1em;
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
 .servicio-HomePage-link {
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: bold;
 
 }
@@ -90,6 +127,20 @@
     /* Evitar que las imágenes salgan del contenedor */
     margin-top: 30px;
 }
+.swiper-container-admin {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    max-width: 80vw;
+    /* Para que no se extienda demasiado */
+    max-height: 70vh;
+    /* Ajustamos el alto máximo */
+    display: flex;
+
+    margin-top: 20px;
+    justify-content: center;
+    /* Alineación horizontal dentro del contenedor */
+    overflow: hidden;
+}
 
 .swiper img {
     width: 100%;
@@ -99,9 +150,223 @@
     
     max-height: 100%;
     /* Asegura que la imagen no exceda el alto del contenedor */
+    border-radius: 8px;
 }
 .ver-servicio-home {
     display: flex;
     justify-content: center;
     width: 100%;
+    border: #f5f5f5 2px solid;
+    margin-top: 30px;
+}
+
+.servicio-container {
+    padding: 20px;
+    text-align: center;
+    max-width: 1200px;
+    /* Limita el ancho máximo */
+    width: 100%;
+    /* Ajusta el ancho al contenedor */
+}
+
+
+/* Resto de tus estilos tal como estaban */
+
+.servicio-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.servicio-container p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.servicio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas */
+    gap: 20px;
+    /* Espacio entre las tarjetas */
+}
+
+.servicio-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.servicio-card:hover {
+    transform: scale(1.05);
+}
+
+.servicio-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.servicio-nombre {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.modal-imagen {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+
+.ver-especialistas {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    
+}
+
+.especialistas-container {
+    padding: 20px;
+    text-align: center;
+    max-width: 1200px;
+    /* Limita el ancho máximo */
+    width: 100%;
+    /* Ajusta el ancho al contenedor */
+}
+
+
+/* Resto de tus estilos tal como estaban */
+
+.especialistas-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.especialistas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas */
+    gap: 20px;
+    /* Espacio entre las tarjetas */
+    
+}
+
+.especialista-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s;
+    height: 60%;
+}
+
+.especialista-card:hover {
+    transform: scale(1.05);
+}
+
+.especialista-nombre {
+
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+.especialistas-grid p{
+
+    font-size: 1.2rem;
+}
+.especialistas-grid img{    
+    max-height: 50%;
+    /* Asegura que la imagen no exceda el alto del contenedor */
+}
+
+.ver-conocenos {
+    padding: 40px 20px;
+    text-align: center;
+    border: #f5f5f5 2px solid;
+}
+
+.conocenos-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #4a4a4a; /* Color de la fuente */
+}
+
+.conocenos-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mision, .vision {
+    max-width: 800px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.mision h2, .vision h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Color del título */
+}
+
+.mision p, .vision p {
+    font-size: 18px;
+    color: #555555; /* Color del texto */
+    line-height: 1.6;
 }

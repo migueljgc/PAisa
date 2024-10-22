@@ -11,6 +11,5 @@
 .tabla-paciente h2{
     display: flex;
     justify-content: center;
-    padding-bottom: 20px ;
     font-size: 2rem;
 }

@@ -222,6 +222,24 @@ export const HeaderSecretaria = ({ closeMenu }) => {
           <li className="list__item list__item--click">
             <div className="list__button list__button--click">
 
+              <a href="#" className="nav__link">Gestion Usuarios</a>
+              <img src="assets/arrow.svg" className="list__arrow" />
+            </div>
+
+            <ul className="list__show">
+              <li className="list__inside">
+                <a href="/" className="nav__link nav__link--inside">Ver Usuarios</a>
+              </li>
+
+              <li className="list__inside">
+                <a href="/" className="nav__link nav__link--inside">Crear Usuarios</a>
+              </li>
+            </ul>
+
+          </li>
+          <li className="list__item list__item--click">
+            <div className="list__button list__button--click">
+
               <a href="#" className="nav__link">Gestion Swiper</a>
               <img src="assets/arrow.svg" className="list__arrow" />
             </div>
@@ -279,7 +297,7 @@ export const AccesoAdmin = () => {
   return (
     <div className="">
       <div className="headerHomePage">
-        <img src="/Logo - Urosalud_20240917_141636_0001.png" alt="Logo" />
+        <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
 
       </div>
       <span onClick={toggleMenu} className="menu-icon">
