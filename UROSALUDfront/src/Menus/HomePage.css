@@ -53,6 +53,35 @@
     text-align: left;
     margin-bottom: 40px;
 }
+.homepage-doc {
+    display: flex;
+    justify-content: center;
+    /* Centramos horizontalmente */
+    width: 100%;
+    height: 50vh;
+    
+}
+.ver-conocenos-doc{
+    display: flex;
+    justify-content: center;
+    height: 33.5vh;
+
+}
+.conocenos-content-doc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.conocenos-content-doc p{
+    font-size: 18px;
+    color: #555555; /* Color del texto */
+    line-height: 1.6;
+    max-width: 800px;
+    text-align: left;
+    margin-bottom: 40px;
+}
 .pieHomePage {
     background-color: pink;
     height: 6vh;
@@ -62,6 +91,7 @@
     background-color: #d7c3e2;
     height: 70px;
     display: flex;
+    justify-content: space-between;
 }
 .texto-inicio{
     display: flex;
@@ -73,10 +103,10 @@
 }
 
 .headerHomePage img {
-    margin-top: 5px;
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
     margin-left: 70px;
-    width: 200px;
-    height: 60px;
+    object-fit: contain; /* Escala la imagen para que quepa sin perder proporciones */
+    
 }
 
 .servicio-HomePage {

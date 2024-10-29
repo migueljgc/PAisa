@@ -54,7 +54,7 @@ export const Recovery = () => {
     return (
         <div className="recovery">
             <div className="logo-recovery">
-                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+            <img src="/Logo.PNG" alt="Logo" />
             </div>
             <div className="reco">
                 <h2>¿Olvidaste tu contraseña?</h2>

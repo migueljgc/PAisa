@@ -4,6 +4,7 @@ import { Acceso, Header } from '../../Componentes/Header';
 import PiePagina from '../../Componentes/PiePagina';
 import axios from 'axios';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { UserinfoUser } from '../../Componentes/Userinfo';
 
 const Agendar = () => {
     const [tiposCitas, setTiposCitas] = useState([]);
@@ -112,19 +113,16 @@ const Agendar = () => {
 
     return (
         <div className="Agendar">
-            <Acceso/>
-            {/* Span para abrir el menú con icono de 3 líneas */}
-            <span onClick={toggleMenu} className="menu-icon">
-                {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
-            </span>
-
-
-            {/* Mostrar el menú Header solo si showMenu es true */}
-            {showMenu && (
-                <div className="menuAgendar">
-                    <Header />
-                </div>
-            )}
+            <div class="headerHomePage">
+                <img src="/Logo.PNG" alt="Logo" />
+                <li className="servicio-HomePage">
+                    <div className="servicio-HomePage-button">
+                        <a href="/citas" className="servicio-HomePage-link">Ver Cita</a>
+                    </div>
+                </li>
+                <UserinfoUser/>
+            </div>
+            
             <div className="agendar">
                 <h1>Agendar Cita</h1>
                 <form onSubmit={handleSubmit}>
@@ -148,6 +146,24 @@ const Agendar = () => {
                                     ))}
                                 </select>
                             </div>
+                            
+                            <div className="labelsAndInputs">
+                                <label >Seleccionar Doctor Disponible</label>
+                                <select className='Selects'
+                                    id="doctor"
+                                    name="doctor"
+                                    value={formData.doctor}
+                                    onChange={handleChange} required
+                                >
+                                    <option key="" value="">Seleccione el Doctor</option>
+                                    {doctors.map((type) => (
+                                        <option key={type.id} value={type.id}>
+                                            {type.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
                             <div className="labelsAndInputs">
                                 <label >Seleccionar Fecha</label>
                                 <input className='inputs'
@@ -158,6 +174,7 @@ const Agendar = () => {
                                     value={formData.fecha}
                                     onChange={handleChange} required />
                             </div>
+
                             <div className="labelsAndInputs">
                             <label>Seleccionar Hora</label>
                                 <select
@@ -175,22 +192,7 @@ const Agendar = () => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="labelsAndInputs">
-                                <label >Seleccionar Doctor Disponible</label>
-                                <select className='Selects'
-                                    id="doctor"
-                                    name="doctor"
-                                    value={formData.doctor}
-                                    onChange={handleChange} required
-                                >
-                                    <option key="" value="">Seleccione el Doctor</option>
-                                    {doctors.map((type) => (
-                                        <option key={type.id} value={type.id}>
-                                            {type.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                            
                         </div>
                         <div className="btnagendar">
                             <button type='submit'>Enviar</button>

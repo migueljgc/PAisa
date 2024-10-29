@@ -132,7 +132,7 @@ export const HeaderDoctor = () => {
 
           <li className="list__item">
             <div className="list__button">
-              <a href="#" className="nav__link">Mis Citas</a>
+              <a href="/mis-citas" className="nav__link">Mis Citas</a>
             </div>
           </li>
 
@@ -145,7 +145,7 @@ export const HeaderDoctor = () => {
 
           <li className="list__item">
             <div className="list__button">
-              <a href="/Login" className="nav__link" onClick={handleLogout}>Cerrar sesion</a>
+              <a href="/" className="nav__link" onClick={handleLogout}>Cerrar sesion</a>
             </div>
           </li>
 
@@ -228,7 +228,7 @@ export const HeaderSecretaria = ({ closeMenu }) => {
 
             <ul className="list__show">
               <li className="list__inside">
-                <a href="/" className="nav__link nav__link--inside">Ver Usuarios</a>
+                <a href="/usuarios" className="nav__link nav__link--inside">Ver Usuarios</a>
               </li>
 
               <li className="list__inside">
@@ -240,17 +240,17 @@ export const HeaderSecretaria = ({ closeMenu }) => {
           <li className="list__item list__item--click">
             <div className="list__button list__button--click">
 
-              <a href="#" className="nav__link">Gestion Swiper</a>
+              <a href="#" className="nav__link">Gestion Slider</a>
               <img src="assets/arrow.svg" className="list__arrow" />
             </div>
 
             <ul className="list__show">
               <li className="list__inside">
-                <a href="#" className="nav__link nav__link--inside">Ver Swipers</a>
+                <a href="#" className="nav__link nav__link--inside">Ver Slider</a>
               </li>
 
               <li className="list__inside">
-                <a href="/crear-swiper" className="nav__link nav__link--inside">Crear Swiper</a>
+                <a href="/crear-swiper" className="nav__link nav__link--inside">Agregar Slider</a>
               </li>
             </ul>
 
@@ -270,7 +270,7 @@ export const HeaderSecretaria = ({ closeMenu }) => {
 
           <li className="list__item">
             <div className="list__button">
-              <a href="/Login" className="nav__link" onClick={handleLogout}>Cerrar sesion</a>
+              <a href="/" className="nav__link" onClick={handleLogout}>Cerrar sesion</a>
             </div>
           </li>
 
@@ -284,7 +284,7 @@ export const HeaderSecretaria = ({ closeMenu }) => {
 export const Acceso = () => {
   return (
     <div class="headerHomePage">
-      <img src="/Logo - Urosalud_20240917_141636_0001.png" alt="Logo" />
+      <img src="/Logo.PNG" alt="Logo" />
 
     </div>
   )
@@ -297,7 +297,7 @@ export const AccesoAdmin = () => {
   return (
     <div className="">
       <div className="headerHomePage">
-        <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+      <img src="/Logo.PNG" alt="Logo" />
 
       </div>
       <span onClick={toggleMenu} className="menu-icon">
@@ -309,6 +309,32 @@ export const AccesoAdmin = () => {
             {showMenu && (
                 <div className="menu">
                     <HeaderSecretaria />
+                </div>
+            )}
+    </div>
+
+  )
+}
+export const AccesoDoc = () => {
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+};
+  return (
+    <div className="">
+      <div className="headerHomePage">
+      <img src="/Logo.PNG" alt="Logo" />
+
+      </div>
+      <span onClick={toggleMenu} className="menu-icon">
+                {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+            </span>
+
+
+            {/* Mostrar el menú Header solo si showMenu es true */}
+            {showMenu && (
+                <div className="menu">
+                    <HeaderDoctor />
                 </div>
             )}
     </div>

@@ -1,0 +1,49 @@
+.ver-cita {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80.5vh;
+    margin-top: 20px;
+}
+
+.tabla-cita {
+    width: 80%;
+}
+
+.tabla-cita h2 {
+    font-size: 2rem;
+}
+
+.head-cita{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+
+.head-cita input{
+    width: 50%;
+    border: 0px;
+    background-color: #d6d8da;
+    border-radius: 8px;
+    padding: 8px 0px 8px 10px;
+}
+
+
+/* Estilo para los botones de "Cargar archivo" */
+.upload-button {
+    background-color: #d0b0e0;
+    /* Fondo del botón: Morado suave */
+    color: #4f3d5b;
+    /* Texto oscuro para contraste */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #c19ed8;
+    /* Cambia el color en hover */
+}

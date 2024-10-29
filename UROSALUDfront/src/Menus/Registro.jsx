@@ -143,7 +143,7 @@ const Registro = () => {
     return (
         <div class="Registro">
             <div class="headerRegistro">
-                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+            <img src="/Logo.PNG" alt="Logo" />
                 <div className="header-registro-datos">
                     <li className="inicio-Registro">
                         <div className="header-Registro-button">

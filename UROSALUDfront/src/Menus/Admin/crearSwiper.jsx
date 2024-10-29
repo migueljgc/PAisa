@@ -78,7 +78,7 @@ const CrearSwiper = () => {
                 <div className="form-crear-Swiper">
                     <form className='crear-Swiper-form' onSubmit={handleChange}>
                         <h2>
-                            Crear Swiper
+                            Agregar Slider
                         </h2>
                         <div className='input-box-crear-Swiper' >
                             <label>Servicio</label>

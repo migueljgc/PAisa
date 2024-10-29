@@ -25,7 +25,7 @@ const Login = () => {
                 if (role === 'DOCTOR') {
                     navigate('/HomePagesDoctor');
                 } else if (role === 'USER') {
-                    navigate('/HomePages');
+                    navigate('/citas');
                 } else if (role === 'SECRETARIA') {
                     navigate('/HomePagesAdmin');
                 }
@@ -48,12 +48,14 @@ const Login = () => {
 
                 const { token, authorities } = response.data;
                 localStorage.setItem('token', token);
-                localStorage.setItem('user', JSON.stringify({ identificacion, role: authorities[0] })); // Assuming single role
+                
                 const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                const user=response1.data.nombre;
+                localStorage.setItem('user', JSON.stringify({ user, role: authorities[0] })); // Assuming single role
                 const stateUser = response1.data.stateUser;
                 console.log(stateUser)
                 if (stateUser === 'INACTIVO') {
@@ -65,7 +67,7 @@ const Login = () => {
                     window.location.href = '/HomePagesDoctor';
                     localStorage.setItem('logget', true);
                 } else if (authorities.includes('USER')) {
-                    window.location.href = '/HomePages';
+                    window.location.href = '/citas';
                     localStorage.setItem('logget', true);
                 }  else if (authorities.includes('SECRETARIA')) {
                     window.location.href = '/HomePagesAdmin';
@@ -92,7 +94,7 @@ const Login = () => {
     return (
         <div className="Login">
             <div className="logologin">
-                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+            <img src="/Logo.PNG" alt="Logo" />
             </div>
             <div className="iniciologin">
                 <form className='formLogin' onSubmit={onLogin}>

@@ -9,15 +9,29 @@ const CrearServicio = () => {
     const [data, setData] = useState({
         nombre: '',
         descripcion: '',
+        especialidad: '', 
 
     });
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const [especialidad, setEspecialidad]= useState([]);
     const fileInputRef = useRef(null);
-
+     const fetchEspecialidad = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/Especialidad/get');
+            const nombre = 'NA';
+            if (nombre) {
+                const filteredData = response.data.filter(item => item.nombre !== nombre);
+                setEspecialidad(filteredData);
+            }
+        } catch (error) {
+            console.error('Error al obtener tipos de especialidad de la base de datos', error);
+        }
+    };
     useEffect(() => {
         document.title = "Crear Servicio";
+        fetchEspecialidad();
     }, []);
     const handleData = (e) => {
         const { name, value } = e.target;
@@ -42,6 +56,7 @@ const CrearServicio = () => {
         setData({
             nombre: '',
             descripcion: '',
+            especialidad: '', 
         });
         setSelectedFile(null);
         setErrorMessage('');
@@ -60,9 +75,10 @@ const CrearServicio = () => {
         formData.append('nombre', data.nombre);
         formData.append('descripcion', data.descripcion);
         formData.append('img', selectedFile);
+        formData.append('especialidad', data.especialidad); // Añade la especialidad al envío
 
         try {
-            const response = await axios.post('http://localhost:8080/api/Especialidad/save', formData, {
+            const response = await axios.post('http://localhost:8080/api/Servicio/save', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -93,6 +109,15 @@ const CrearServicio = () => {
                             <div className='input-box-crear-servicio'>
                                 <label>Descripcion</label>
                                 <textarea rows={8} name="descripcion" id="descripcion" placeholder='Ingrese una breve descripcion del servicio' value={data.descripcion} onChange={handleData} required />
+                            </div>
+                            <div className='input-box-crear-servicio'>
+                                <label>Especialidad</label>
+                                <select name="especialidad" value={data.especialidad} onChange={handleData} required>
+                                    <option value="">Seleccione una especialidad</option>
+                                    {especialidad.map((item) => (
+                                        <option key={item.id} value={item.id}>{item.nombre}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className='input-file-crear-servicio'>
                                 <input type="file" ref={fileInputRef} onChange={handleFileChange} />

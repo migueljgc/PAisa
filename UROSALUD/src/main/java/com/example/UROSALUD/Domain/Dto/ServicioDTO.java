@@ -1,5 +1,6 @@
 package com.example.UROSALUD.Domain.Dto;
 
+import com.example.UROSALUD.Persistence.Entity.Especialidad;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,5 @@ public class ServicioDTO {
     private String descripcion;
 
     private byte[] img;
+    private Especialidad especialidad;
 }

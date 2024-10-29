@@ -1,30 +1,28 @@
 package com.example.UROSALUD.Domain.Service;
 
-import com.example.UROSALUD.Domain.Dto.GeneroDTO;
-import com.example.UROSALUD.Domain.Mapper.GeneroMapper;
-import com.example.UROSALUD.Persistence.Repository.GeneroRepository;
+import com.example.UROSALUD.Persistence.Entity.Especialidad;
+import com.example.UROSALUD.Persistence.Repository.EspecialidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-public class GeneroService {
+public class EspecialidadService {
     @Autowired
-    private GeneroRepository generoRepository;
+    private EspecialidadRepository especialidadRepositoryRepository;
 
-    public List<GeneroDTO> getAll() {
-        return generoRepository.findAll().stream().map(GeneroMapper::toDto).collect(Collectors.toList());
+    public List<Especialidad> getAll() {
+        return especialidadRepositoryRepository.findAll();
     }
 
-    public Optional<GeneroDTO> findById(Long id) {
-        return generoRepository.findById(id).map(GeneroMapper::toDto);
+    public Optional<Especialidad> findById(Long id) {
+        return especialidadRepositoryRepository.findById(id);
     }
 
-    public GeneroDTO save(GeneroDTO generoDTO) {
-        generoRepository.save(GeneroMapper.toEntity(generoDTO));
-        return generoDTO;
+    public Especialidad save(Especialidad especialidad) {
+        especialidadRepositoryRepository.save(especialidad);
+        return especialidad;
     }
 }

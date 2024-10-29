@@ -23,7 +23,7 @@ public class EmailServiceImpl implements  IEmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            helper.setFrom("");
+            helper.setFrom("urosalud1234@gmail.com");
             helper.setTo(toUser);
             helper.setSubject(subject);
             helper.setText(message, true);  // Aquí se especifica que el contenido es HTML
@@ -38,7 +38,7 @@ public class EmailServiceImpl implements  IEmailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            helper.setFrom("");
+            helper.setFrom("urosalud1234@gmail.com");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(body);

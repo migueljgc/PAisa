@@ -10,6 +10,7 @@ public class ServicioMapper {
         servicio.setNombre(servicioDTO.getNombre());
         servicio.setDescripcion(servicioDTO.getDescripcion());
         servicio.setImg(servicioDTO.getImg());
+        servicio.setEspecialidad(servicioDTO.getEspecialidad());
         return servicio;
     }
 
@@ -19,6 +20,7 @@ public class ServicioMapper {
         servicioDTO.setNombre(servicio.getNombre());
         servicioDTO.setDescripcion(servicio.getDescripcion());
         servicioDTO.setImg(servicio.getImg());
+        servicioDTO.setEspecialidad(servicio.getEspecialidad());
         return servicioDTO;
     }
 }
