@@ -17,6 +17,9 @@ import Servicio from '../src/Menus/Admin/servicio';
 import VerCita from '../src/Menus/Usuario/VerCita';
 import VerCitas from '../src/Menus/Doctor/VerCitas';
 import VerUsuarios from '../src/Menus/Admin/VErUsuarios';
+import { Perfil } from '../src/Componentes/Perfil';
+import { Activate } from '../src/Componentes/ActivatePage';
+import CrearUsuario from '../src/Menus/Admin/CrearUsuario';
 
 
 
@@ -29,7 +32,7 @@ export const AppRouter = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/Recuperacion" element={<Recovery/>} />
         <Route path="/Registro" element={<Registro />} />
-        <Route path="/activate/:token" element={""} />
+        <Route path="/activate/:token" element={<Activate/>} />
         <Route path="/PQRS" element={<PQRSD />} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
         <Route path="*" element={<Login />} />
@@ -43,6 +46,9 @@ export const AppRouter = () => {
         <Route path="/mis-citas" element={
           <ProtectedRoute allowedRoles={['DOCTOR']} element={<VerCitas />} />
         } />
+        <Route path="/perfil-doctor" element={
+          <ProtectedRoute allowedRoles={['DOCTOR']} element={<Perfil />} />
+        } />
 
 
         {/* Rutas Usuario */}
@@ -51,6 +57,9 @@ export const AppRouter = () => {
         } />
         <Route path="/Agendar" element={
           <ProtectedRoute allowedRoles={['USER']} element={<Agendar />} />
+        } />
+        <Route path="/perfil-user" element={
+          <ProtectedRoute allowedRoles={['USER']} element={<Perfil />} />
         } />
 
         {/* Rutas Secretaria */}
@@ -72,8 +81,14 @@ export const AppRouter = () => {
         <Route path="/usuarios" element={
           <ProtectedRoute allowedRoles={['SECRETARIA']} element={<VerUsuarios />} />
         } />
+        <Route path="/crear-usuario" element={
+          <ProtectedRoute allowedRoles={['SECRETARIA']} element={<CrearUsuario />} />
+        } />
         <Route path="/ver-servicios" element={
           <ProtectedRoute allowedRoles={['SECRETARIA']} element={<Servicio />} />
+        } />
+        <Route path="/perfil-admin" element={
+          <ProtectedRoute allowedRoles={['SECRETARIA']} element={<Perfil />} />
         } />
       </Route>
     </Routes>

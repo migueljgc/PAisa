@@ -12,13 +12,13 @@ const VerCita = () => {
     useEffect(() => {
         const fechtPqrsd = async () => {
             const response = await axios.get('http://localhost:8080/api/Citas/get')
-            
+
             const token = localStorage.getItem('token');
             const response1 = await axios.get('/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });console.log(response1)
+            }); console.log(response1)
             const usuario = response1.data.identificacion;
             console.log(usuario);
 
@@ -27,7 +27,7 @@ const VerCita = () => {
                 console.log(filteredData);
                 setCita(filteredData)
             }
-           
+
         }
         fechtPqrsd();
     }, [])
@@ -42,10 +42,42 @@ const VerCita = () => {
     const columns = [
         { name: 'ID cita', selector: row => row.id, sortable: true },
         { name: 'Fecha', selector: row => row.fecha, sortable: true },
-        { name: 'Doctor', cell: row => <div className="">{row.doctor.name} {row.doctor.lastName} </div>},
+        { name: 'Doctor', cell: row => <div className="">{row.doctor.name} {row.doctor.lastName} </div> },
         { name: 'Hora', selector: row => row.hora, sortable: true },
-        { name: 'Historia clínica', cell: row => <button className="upload-button">Descargar archivo</button> },
-        { name: 'Exámenes', cell: row => <button className="upload-button">Descargar archivo</button> }
+        {
+            name: 'Historia clínica',
+            cell: row => (
+                <span>
+                    {row.historiaClinica ? (
+                        <button
+                            className="upload-button"
+                            onClick={() => handleDownload(row.historiaClinica)}
+                        >
+                            Descargar archivo
+                        </button>
+                    ) : (
+                        <p>No Disponible</p>
+                    )}
+                </span>
+            )
+        },
+        {
+            name: 'Exámenes',
+            cell: row => (
+                <span>
+                    {row.examenes ? (
+                        <button
+                            className="upload-button"
+                            onClick={() => handleDownload(row.examenes)}
+                        >
+                            Descargar archivo
+                        </button>
+                    ) : (
+                        <p>No Disponible</p>
+                    )}
+                </span>
+            )
+        }
     ];
     return (
         <div>
@@ -57,9 +89,9 @@ const VerCita = () => {
                     </div>
                 </li>
                 <div className="Userinfo">
-<UserinfoUser />
+                    <UserinfoUser />
                 </div>
-                
+
             </div>
             <div className="ver-cita">
 
@@ -83,22 +115,19 @@ const VerCita = () => {
                         customStyles={{
                             headCells: {
                                 style: {
-                                    backgroundColor: '#89ceff', 
+                                    backgroundColor: '#89ceff',
                                     color: 'black',
                                     fontSize: '1.2rem',
                                 },
                             },
                             rows: {
-                                style: {
-                                    backgroundColor: '#89ceff', 
-                                },
                                 highlightOnHoverStyle: {
-                                    backgroundColor: '#ffc0cb', 
+                                    backgroundColor: '#ffc0cb',
                                 },
                             },
                             cells: {
                                 style: {
-                                    borderRight: '3px solid blue', 
+                                    borderRight: '3px solid blue',
                                 },
                             },
                             tableWrapper: {

@@ -1,0 +1,49 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-buttons button:hover {
+    background-color: #357ab8;
+}
+
+.modal-buttons button:last-child {
+    background-color: #4a90e2;
+}
+
+.modal-buttons button:last-child:hover {
+    background-color: #999;
+}
+.modal-Upload input {
+    margin-top: 8px;
+    width: 100%;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #d6d8da;
+    border-radius: 8px;
+    padding: 8px 0px 8px 10px;
+}

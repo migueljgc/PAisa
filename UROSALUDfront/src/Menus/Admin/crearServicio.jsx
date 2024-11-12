@@ -100,8 +100,6 @@ const CrearServicio = () => {
                             Crear Servicio
                         </h2>
                         <div className="crear-servicio">
-
-
                             <div className='input-box-crear-servicio' >
                                 <label>Servicio</label>
                                 <input type="text" name="nombre" id="nombre" placeholder='Ingrese el Nombre del servicio' value={data.nombre} onChange={handleData} required />

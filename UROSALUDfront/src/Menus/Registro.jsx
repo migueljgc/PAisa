@@ -11,6 +11,7 @@ const Registro = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
     const [generosTypes, setGenerosTypes] = useState([]);
+    const [isLogged, setIsLogged] = useState('');
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -25,12 +26,37 @@ const Registro = () => {
         direccion: ''
     });
 
+    const checkLoginStatus = () => {
+        const logged = localStorage.getItem('loggetUROSALUD') === 'true';
+        setIsLogged(logged);
+        console.log('LoggetUROSALUD: ', logged);
+        if (logged) {
+            const userData = JSON.parse(localStorage.getItem('userUROSALUD'));
+            if (userData) {
+                const { role } = userData;
+                if (role === 'DOCTOR') {
+                    navigate('/HomePagesDoctor');
+                } else if (role === 'USER') {
+                    navigate('/citas');
+                } else if (role === 'SECRETARIA') {
+                    navigate('/HomePagesAdmin');
+                }
+            }
+        }
+
+    };
+
+    useEffect(() => {
+        checkLoginStatus();
+        
+    }, []); // Solo se ejecuta una vez al montar el componente
+
     useEffect(() => {
         document.title = "Registro"
 
         const fetchIdentificationTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/TiposIdentificacion/get');
+                const response = await axios.get('/api/TiposIdentificacion/get');
                 console.log('Tipos de identificación obtenidos:', response.data);
                 setIdentificationTypes(response.data);
             } catch (error) {
@@ -40,7 +66,7 @@ const Registro = () => {
 
         const fetchGeneroTypes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/Genero/get');
+                const response = await axios.get('/api/Genero/get');
                 console.log('Tipos de generos obtenidos:', response.data);
                 setGenerosTypes(response.data);
             } catch (error) {
@@ -138,7 +164,9 @@ const Registro = () => {
         }
 
     };
-
+    if (isLogged) {
+        return null; // o un spinner si quieres mostrar algo mientras se redirige
+    }
 
     return (
         <div class="Registro">

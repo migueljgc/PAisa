@@ -76,36 +76,59 @@
 }
 
 .Registros {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2.7fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 100px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "registro1 registro2";
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 .registro1 {
-    grid-area: registro1;
+    background-color: #e6f3ff;
+    /* Azul claro */
+    border: 1px solid #b3d4fc;
+    /* Borde azul suave */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    padding: 20px;
+    /* Espacio interior */
+    margin: 10px;
+    /* Espacio exterior */
+    width: 400px;
+    /* Ancho del contenedor */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .registro2 {
-    grid-area: registro2;
+    background-color: #e6f3ff;
+    /* Azul claro */
+    border: 1px solid #b3d4fc;
+    /* Borde azul suave */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    padding: 20px;
+    /* Espacio interior */
+    margin: 10px;
+    /* Espacio exterior */
+    width: 400px;
+    /* Ancho del contenedor */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     
 }
 .labelsAndInputs{
+    display: flex;
+    justify-content: space-between;
     margin-top: 15px;
-    font-size: 18px;
+    font-size: 1rem !important;
+    margin-bottom: 8px;
 }
 
 .labelsAndInputs input, select{
-    margin-top: 8px;
-    width: 100%;
-    border-radius: 8px;
-    border: 0px;
-    background-color: #d6d8da;
-    border-radius: 8px;
-    padding: 8px 0px 8px 10px;
+    width: 50% !important;
+    border-radius: 8px !important;
+    border: 0px !important;
+    background-color: #d6d8da !important;
+    border-radius: 8px !important;
+    padding: 8px 0px 8px 10px !important;
+    font-size: 0.9rem !important;
+    margin-right: 0px !important;
 }
 .btnRegistrar {
     display: flex;

@@ -91,9 +91,6 @@ const Pacientes = () => {
                                 },
                             },
                             rows: {
-                                style: {
-                                    backgroundColor: '#ffe4e1', // Celdas en rosa claro
-                                },
                                 highlightOnHoverStyle: {
                                     backgroundColor: '#ffc0cb', // Hover sobre filas
                                 },

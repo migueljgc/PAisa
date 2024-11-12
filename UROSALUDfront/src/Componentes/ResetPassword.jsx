@@ -24,17 +24,17 @@ export const ResetPassword = () => {
     }, []); // Solo se ejecuta una vez al montar el componente
 
     const checkLoginStatus = () => {
-        const logged = localStorage.getItem('logget') === 'true';
+        const logged = localStorage.getItem('loggetUROSALUD') === 'true';
         setIsLogged(logged);
-        console.log('Logget: ', logged);
+        console.log('LoggetUROSALUD: ', logged);
         if (logged) {
-            const userData = JSON.parse(localStorage.getItem('user'));
+            const userData = JSON.parse(localStorage.getItem('userUROSALUD'));
             if (userData) {
                 const { role } = userData;
                 if (role === 'DOCTOR') {
                     navigate('/HomePagesDoctor');
                 } else if (role === 'USER') {
-                    navigate('/HomePages');
+                    navigate('/citas');
                 } else if (role === 'SECRETARIA') {
                     navigate('/HomePagesAdmin');
                 }
@@ -99,7 +99,7 @@ export const ResetPassword = () => {
     return (
         <div className='ResetPassword'>
             <div className="logo-ResetPassword">
-                <img src="/Logo_-_Urosalud_20240917_141636_0000.png" alt="Logo" />
+                <img src="/Logo.PNG" alt="Logo" />
             </div>
             <div className="reset">
                 <form onSubmit={handleResetPassword}>

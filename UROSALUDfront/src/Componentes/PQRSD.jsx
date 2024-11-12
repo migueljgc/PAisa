@@ -34,19 +34,19 @@ const PQRSD = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-        const selectedTiposSoli = tiposSoli.find(type => type.id === parseInt(formData.tiposSolicitud));
-        const response = await axios.post('/Pqrs/save', {
-            fechaHora: formData.fechaHora,
-            descripcion: formData.descripcion,
-            tiposSolicitud: { id: selectedTiposSoli.id }
-        });
-        alert('Exito')
-        handleReset();
-    }
-    catch (error){
-        console.error(error)
-    }
+        try {
+            const selectedTiposSoli = tiposSoli.find(type => type.id === parseInt(formData.tiposSolicitud));
+            const response = await axios.post('/Pqrs/save', {
+                fechaHora: formData.fechaHora,
+                descripcion: formData.descripcion,
+                tiposSolicitud: { id: selectedTiposSoli.id }
+            });
+            alert('Exito')
+            handleReset();
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
 
@@ -59,8 +59,8 @@ const PQRSD = () => {
                         Formulario de Peticiones, Quejas, Reclamos y Sugerencias
                     </h2>
                 </div>
-                <div className="frompqrsd">
-                    <form onSubmit={handleSubmit}>
+                <div className="formpqrsd">
+                    <form className="pqrsdform"onSubmit={handleSubmit}>
                         <div className="tipoandfecha">
                             <div className="tipospqrs">
                                 <label>Tipo de solicitud:</label>
@@ -86,13 +86,14 @@ const PQRSD = () => {
                                 />
                             </div>
 
-                        </div>
-                        <div className="descripcionpqrs">
-                            <label>Descripcion:</label>
-                            <textarea name="descripcion" id="descripcion"
-                                value={formData.descripcion}
-                                onChange={handleChange} required
-                            />
+
+                            <div className="descripcionpqrs">
+                                <label>Descripcion:</label>
+                                <textarea name="descripcion" id="descripcion"
+                                    value={formData.descripcion}
+                                    onChange={handleChange} required
+                                />
+                            </div>
                         </div>
                         <div className="btnpqrs">
                             <button type='onSubmit'>Enviar</button>

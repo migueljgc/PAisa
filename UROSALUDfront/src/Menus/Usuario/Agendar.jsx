@@ -19,7 +19,7 @@ const Agendar = () => {
         hora: '',
         doctor: '',
     });
-    
+
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
@@ -38,20 +38,20 @@ const Agendar = () => {
             }
         };
 
-       // Hacer la petición para obtener todos los usuarios
-       axios.get('/api/Usuario/get')
-       .then(response => {
-           // Filtrar los usuarios que tienen el rol "doctor"
-           const filteredDoctors = response.data.filter(usuario => usuario.role === 'DOCTOR');
-           setDoctors(filteredDoctors);
-           console.log(doctors)
-       })
-       .catch(error => console.error('Error fetching users:', error));
+        // Hacer la petición para obtener todos los usuarios
+        axios.get('/api/Usuario/get')
+            .then(response => {
+                // Filtrar los usuarios que tienen el rol "doctor"
+                const filteredDoctors = response.data.filter(usuario => usuario.role === 'DOCTOR');
+                setDoctors(filteredDoctors);
+                console.log(doctors)
+            })
+            .catch(error => console.error('Error fetching users:', error));
 
         const today = new Date().toISOString().split('T')[0];
         setMinDate(today);
 
-        
+
 
         fetchTiposCitas();
 
@@ -76,29 +76,29 @@ const Agendar = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
+        try {
             // Solicitud para obtener el ID del paciente autenticado
             const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-        
+
             if (response1.status === 200) {
                 alert('Cita registrada exitosamente.');
                 const user = response1.data.id;
                 console.log(user);
-        
+
                 // Registro de la cita
                 const CitaResponse = await axios.post('http://localhost:8080/api/Citas/save', {
                     fecha: formData.fecha,
                     estadosCitas: { id: 1 || '' },
                     doctor: { id: parseInt(formData.doctor, 10) || '' },
-                    tiposCitas: { id: parseInt(formData.TiposCitas, 10) || ''},
+                    tiposCitas: { id: parseInt(formData.TiposCitas, 10) || '' },
                     hora: formData.hora,
                     paciente: { id: user || '' }
                 });
-                
+
                 console.log('usuario', CitaResponse);
             } else {
                 console.error('Error al autenticar al usuario');
@@ -107,7 +107,7 @@ const Agendar = () => {
         } catch (error) {
             console.error('Error al reservar la cita:', error);
         }
-       
+
     };
 
 
@@ -120,18 +120,19 @@ const Agendar = () => {
                         <a href="/citas" className="servicio-HomePage-link">Ver Cita</a>
                     </div>
                 </li>
-                <UserinfoUser/>
+                <UserinfoUser />
             </div>
-            
+
             <div className="agendar">
                 <h1>Agendar Cita</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="agendarcita" >
 
                         <div className="datosagendar">
-                            <div className="labelsAndInputs">
-                            <label>Seleccionar Tipo de Cita</label>
+                            <div className="labelsAndInputs-agendar">
+                                <label>Seleccionar Tipo de Cita</label>
                                 <select
+                                    className='labelsAndInputs-agendar-input-select'
                                     id="TiposCitas"
                                     name="TiposCitas"
                                     value={formData.TiposCitas}
@@ -146,10 +147,10 @@ const Agendar = () => {
                                     ))}
                                 </select>
                             </div>
-                            
-                            <div className="labelsAndInputs">
+
+                            <div className="labelsAndInputs-agendar">
                                 <label >Seleccionar Doctor Disponible</label>
-                                <select className='Selects'
+                                <select className='labelsAndInputs-agendar-input-select'
                                     id="doctor"
                                     name="doctor"
                                     value={formData.doctor}
@@ -164,9 +165,9 @@ const Agendar = () => {
                                 </select>
                             </div>
 
-                            <div className="labelsAndInputs">
+                            <div className="labelsAndInputs-agendar">
                                 <label >Seleccionar Fecha</label>
-                                <input className='inputs'
+                                <input className='labelsAndInputs-agendar-input-select'
                                     type="date"
                                     id="fecha"
                                     name="fecha"
@@ -175,11 +176,12 @@ const Agendar = () => {
                                     onChange={handleChange} required />
                             </div>
 
-                            <div className="labelsAndInputs">
-                            <label>Seleccionar Hora</label>
+                            <div className="labelsAndInputs-agendar">
+                                <label>Seleccionar Hora</label>
                                 <select
                                     id="hora"
                                     name="hora"
+                                    className='labelsAndInputs-agendar-input-select'
                                     value={formData.hora}
                                     onChange={handleChange}
                                     required
@@ -192,7 +194,7 @@ const Agendar = () => {
                                     ))}
                                 </select>
                             </div>
-                            
+
                         </div>
                         <div className="btnagendar">
                             <button type='submit'>Enviar</button>

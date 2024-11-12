@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final UsuarioRepository userRepository;
-
+    private final EmailServiceImpl emailService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -47,6 +47,7 @@ public class AuthServiceImpl implements AuthService {
                 .number(request.getNumber())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .email(request.getEmail())
                 .especialidad(request.getEspecialidad())
                 .identificacion(request.getIdentificacion())
                 .tiposIdentificacion(request.getTiposIdentificacion())
@@ -55,10 +56,33 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
         // Generar los horarios si el rol es doctor
 
-            // Llamar al servicio de generación de horarios
+
+        if (user.getRole() == Role.DOCTOR) {
             horarioService.generarHorariosParaDoctor(user.getId());
+        }
+
+
 
         var jwtToken = jwtService.genereteToken((UserDetails) user);
+        String activationLink = "http://localhost:5173/activate/"+jwtToken;
+        String mensajeHtml = String.format(
+                "<h1>¡Querido %s %s!</h1>" +
+                        "<p>Te has registrado con éxito, activa tu cuenta para ingresar a la página" +
+                        "<br /><br />" +
+                        "<a href=\"%s\">Activar</a>" +
+                        "<br /><br />" +
+                        "Este enlace te llevará a una página donde podrás confirmar tu identidad. Una vez completado este paso, tu verificación estará finalizada y podrás acceder a todos los beneficios de nuestra plataforma de manera segura." +
+                        "<br /><br />" +
+                        "Coordialmente<br /><br />" +
+                        "Equipo Uros.<br /><br />",
+                user.getName(), user.getLastName(), activationLink
+        );
+
+        emailService.sendEmails(
+                new String[]{user.getEmail()},
+                "Confirma tu correo",
+                mensajeHtml
+        );
 
         return AuthResponse.builder()
                 .token(jwtToken).build();
@@ -74,6 +98,7 @@ public class AuthServiceImpl implements AuthService {
                 .genero(request.getGenero())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .email(request.getEmail())
                 .especialidad(request.getEspecialidad())
                 .identificacion(request.getIdentificacion())
                 .tiposIdentificacion(request.getTiposIdentificacion())
@@ -81,6 +106,25 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.genereteToken((UserDetails) user);
+        String activationLink = "http://localhost:5173/activate/"+jwtToken;
+        String mensajeHtml = String.format(
+                "<h1>¡Querido %s %s!</h1>" +
+                        "<p>Te has registrado con éxito, activa tu cuenta para ingresar a la página" +
+                        "<br /><br />" +
+                        "<a href=\"%s\">Activar</a>" +
+                        "<br /><br />" +
+                        "Este enlace te llevará a una página donde podrás confirmar tu identidad. Una vez completado este paso, tu verificación estará finalizada y podrás acceder a todos los beneficios de nuestra plataforma de manera segura." +
+                        "<br /><br />" +
+                        "Coordialmente<br /><br />" +
+                        "Equipo Uros.<br /><br />",
+                user.getName(), user.getLastName(), activationLink
+        );
+
+        emailService.sendEmails(
+                new String[]{user.getEmail()},
+                "Confirma tu correo",
+                mensajeHtml
+        );
         return AuthResponse.builder()
                 .token(jwtToken).build();
     }

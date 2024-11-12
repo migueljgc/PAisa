@@ -2,12 +2,14 @@
 .dropdown-content {
   display: flex;
   position: absolute;
-  background-color: #ffffff;
+  margin-right: 10px;
+  background-color: beige;
   min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(131, 121, 121, 0.2);
   z-index: 2;
   right: 0;
   border-radius: 5px;
+
 }
 
 .dropdown-content a p {
@@ -23,18 +25,35 @@
 }
 
 .dropdown-content a i {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .arriba p{
   color: #000000;
   text-align: center;
-  margin-left: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-
+.abajo li{
+  display: flex;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
 .abajo a{
   color: #000000;
-  text-align: center;
-  margin-left: 10px;
+  text-decoration: none;
+  padding: 1.3rem 0.7rem;
+  
 }
 
+.abajo{
+  margin-bottom: 20px;
+}
+.list__img{
+  width: 1.8rem;
+  display: block;
+  margin-left: 0px !important;
+}

@@ -57,7 +57,6 @@ import java.util.List;
     }
     private RequestMatcher publicEndpoinds(){
         return new OrRequestMatcher(
-          new AntPathRequestMatcher("/api/greeting/sayHelloPublic"),
                 new AntPathRequestMatcher("/api/auth/**"),
                 new AntPathRequestMatcher("/api/TiposIdentificacion/get"),
                 new AntPathRequestMatcher("/api/Genero/get"),

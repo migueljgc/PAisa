@@ -5,6 +5,7 @@ import com.example.UROSALUD.Domain.Dto.UsuarioDto;
 import com.example.UROSALUD.Domain.Service.UsuarioService;
 import com.example.UROSALUD.Persistence.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,16 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+    @PutMapping("/perfil/update")
+    public ResponseEntity<?> updateProfile(@RequestBody UsuarioDto userUpdateDTO) {
+        try {
+            // Llama a un servicio que procese la actualización
+            System.out.println("user "+userUpdateDTO);
+            usuarioService.updateUserProfile(userUpdateDTO);
+            return ResponseEntity.ok("Perfil actualizado correctamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el perfil.");
+        }
+    }
+
 }

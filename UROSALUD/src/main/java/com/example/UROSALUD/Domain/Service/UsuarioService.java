@@ -52,4 +52,34 @@ public class UsuarioService {
             System.out.println("Email no encontrado");
         }
     }
+    public void verifyUser(String username) {
+
+        User user = usuarioRepository.findByIdentificacion(username);
+        if (user != null){
+            user.setStateUser("ACTIVO");
+            usuarioRepository.save(user);
+        }
+    }
+
+    public void updateUserProfile(UsuarioDto userUpdateDTO) {
+        Optional<User> optionalUser = usuarioRepository.findById(userUpdateDTO.getId());
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            // Asigna todos los campos de userUpdateDTO al objeto User
+            user.setName(userUpdateDTO.getName());
+            user.setLastName(userUpdateDTO.getLastName());
+            user.setEmail(userUpdateDTO.getEmail());
+            user.setDireccion(userUpdateDTO.getDireccion());
+            user.setIdentificacion(userUpdateDTO.getIdentificacion());
+            user.setNumber(userUpdateDTO.getNumber());
+            user.setGenero(userUpdateDTO.getGenero());
+            user.setTiposIdentificacion(userUpdateDTO.getTiposIdentificacion());
+
+            System.out.println("user "+user);
+            usuarioRepository.save(user);
+        } else {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+    }
 }

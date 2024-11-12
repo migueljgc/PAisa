@@ -50,4 +50,8 @@ public class CitasService {
                 .filter(horario -> !horario.getHora().equals(LocalTime.of(12, 0)))  // Excluir horario de descanso
                 .collect(Collectors.toList());
     }
+    public CitasDTO update(CitasDTO citasDTO) {
+        citasRepository.save(CitasMapper.toEntity(citasDTO));
+        return citasDTO;
+    }
 }

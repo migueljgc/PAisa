@@ -4,12 +4,14 @@ import { ImExit } from 'react-icons/im';
 import { RxDashboard } from 'react-icons/rx';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
+import { UserinfoAmin, UserinfoSecre } from './Userinfo';
 
 export const Header = () => {
   const handleLogout = () => {
-    localStorage.setItem('logget', 'false');
-    localStorage.setItem('token', '');
-    localStorage.setItem('user', JSON.stringify(''));
+    localStorage.setItem('loggetUROSALUD', 'false');
+    localStorage.setItem('tokenUROSALUD', '');
+    localStorage.setItem('userUROSALUD', JSON.stringify(''));
+
   };
   useEffect(() => {
     const listElements = document.querySelectorAll('.list__button--click');
@@ -91,9 +93,10 @@ export const Header = () => {
 export const HeaderDoctor = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleLogout = () => {
-    localStorage.setItem('logget', 'false');
-    localStorage.setItem('token', '');
-    localStorage.setItem('user', JSON.stringify(''));
+    localStorage.setItem('loggetUROSALUD', 'false');
+    localStorage.setItem('tokenUROSALUD', '');
+    localStorage.setItem('userUROSALUD', JSON.stringify(''));
+
   };
   useEffect(() => {
     const listElements = document.querySelectorAll('.list__button--click');
@@ -158,9 +161,10 @@ export const HeaderDoctor = () => {
 
 export const HeaderSecretaria = ({ closeMenu }) => {
   const handleLogout = () => {
-    localStorage.setItem('logget', 'false');
-    localStorage.setItem('token', '');
-    localStorage.setItem('user', JSON.stringify(''));
+    localStorage.setItem('loggetUROSALUD', 'false');
+    localStorage.setItem('tokenUROSALUD', '');
+    localStorage.setItem('userUROSALUD', JSON.stringify(''));
+
   };
   useEffect(() => {
     const listElements = document.querySelectorAll('.list__button--click');
@@ -232,28 +236,16 @@ export const HeaderSecretaria = ({ closeMenu }) => {
               </li>
 
               <li className="list__inside">
-                <a href="/" className="nav__link nav__link--inside">Crear Usuarios</a>
+                <a href="/crear-usuario" className="nav__link nav__link--inside">Crear Usuarios</a>
               </li>
             </ul>
 
           </li>
-          <li className="list__item list__item--click">
-            <div className="list__button list__button--click">
-
-              <a href="#" className="nav__link">Gestion Slider</a>
-              <img src="assets/arrow.svg" className="list__arrow" />
+          
+          <li className="list__item">
+            <div className="list__button">
+            <a href="/crear-swiper" className="nav__link">Agregar Slider</a>
             </div>
-
-            <ul className="list__show">
-              <li className="list__inside">
-                <a href="#" className="nav__link nav__link--inside">Ver Slider</a>
-              </li>
-
-              <li className="list__inside">
-                <a href="/crear-swiper" className="nav__link nav__link--inside">Agregar Slider</a>
-              </li>
-            </ul>
-
           </li>
 
           <li className="list__item">
@@ -293,24 +285,27 @@ export const AccesoAdmin = () => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-};
+  };
   return (
     <div className="">
       <div className="headerHomePage">
-      <img src="/Logo.PNG" alt="Logo" />
+        <img src="/Logo.PNG" alt="Logo" />
+        <div className="Userinfo">
+          <UserinfoSecre />
+        </div>
 
       </div>
       <span onClick={toggleMenu} className="menu-icon">
-                {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
-            </span>
+        {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+      </span>
 
 
-            {/* Mostrar el menú Header solo si showMenu es true */}
-            {showMenu && (
-                <div className="menu">
-                    <HeaderSecretaria />
-                </div>
-            )}
+      {/* Mostrar el menú Header solo si showMenu es true */}
+      {showMenu && (
+        <div className="menu">
+          <HeaderSecretaria />
+        </div>
+      )}
     </div>
 
   )
@@ -319,24 +314,27 @@ export const AccesoDoc = () => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-};
+  };
   return (
     <div className="">
       <div className="headerHomePage">
-      <img src="/Logo.PNG" alt="Logo" />
+        <img src="/Logo.PNG" alt="Logo" />
+        <div className="Userinfo">
+          <UserinfoAmin />
+        </div>
 
       </div>
       <span onClick={toggleMenu} className="menu-icon">
-                {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
-            </span>
+        {showMenu ? <FaTimes size={30} /> : <FaBars size={30} />}
+      </span>
 
 
-            {/* Mostrar el menú Header solo si showMenu es true */}
-            {showMenu && (
-                <div className="menu">
-                    <HeaderDoctor />
-                </div>
-            )}
+      {/* Mostrar el menú Header solo si showMenu es true */}
+      {showMenu && (
+        <div className="menu">
+          <HeaderDoctor />
+        </div>
+      )}
     </div>
 
   )

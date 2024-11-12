@@ -21,9 +21,11 @@ export const Script = () => {
 
         </div>
         <div className="abajo">
-          <a href="/EditarPerfilAdmin">
-            Editar usuario
-          </a>
+        <li>
+            <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
+            <a href="/perfil-doctor" className="nav__link">Perfil</a>
+
+          </li>
 
         </div>
       </div>
@@ -43,9 +45,9 @@ export const ScriptUser = () => {
     setUser(localStorage.getItem('users'));
   }, []);
   const handleLogout = () => {
-    localStorage.setItem('logget', 'false');
-    localStorage.setItem('token', '');
-    localStorage.setItem('user', JSON.stringify(''));
+    localStorage.setItem('loggetUROSALUD', 'false');
+    localStorage.setItem('tokenUROSALUD', '');
+    localStorage.setItem('userUROSALUD', JSON.stringify(''));
 
   };
   return (
@@ -57,10 +59,17 @@ export const ScriptUser = () => {
           {user && <p>Bienvenido, {user}!</p>}
         </div>
         <div className="abajo">
-        <a href="/Login" onClick={handleLogout}>
-        Salir</a>
+          <li>
+            <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
+            <a href="/perfil-user" className="nav__link">Perfil</a>
 
+          </li>
         </div>
+        <div className="abajo">
+          <a href="/Login" onClick={handleLogout}>
+              Salir</a>
+        </div>
+
       </div>
 
     </div>
@@ -85,16 +94,20 @@ export const ScriptSecre = () => {
       <div className="App">
         <div className="arriba">
           {user && <p>Bienvenido, {user}!</p>}
+
         </div>
         <div className="abajo">
-          <a href="/EditarPerfilSecre">
-            Editar usuario
-          </a>
+        <li>
+            <img src="assets/perfil.svg" className="list__img" onClick={() => navigate('/perfil-user')} />
+            <a href="/perfil-admin" className="nav__link">Perfil</a>
+
+          </li>
 
         </div>
       </div>
 
     </div>
+
 
 
   );

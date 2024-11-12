@@ -10,6 +10,8 @@ import 'swiper/css/scrollbar';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import axios from 'axios';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importar el ícono de menú
+import { UserinfoAmin, UserinfoSecre } from '../Componentes/Userinfo';
+import { useNavigate } from 'react-router-dom';
 
 
 export const HomePageDoctor = () => {
@@ -34,7 +36,11 @@ export const HomePageDoctor = () => {
     return (
         <div className='HomePage'>
             <div class="headerHomePage">
-            <img src="/Logo.PNG" alt="Logo" />
+                <img src="/Logo.PNG" alt="Logo" />
+                <div className="Userinfo">
+                    <UserinfoAmin />
+                </div>
+
             </div>
             {/* Span para abrir el menú con icono de 3 líneas */}
             <span onClick={toggleMenu} className="menu-icon">
@@ -117,7 +123,10 @@ export const HomePageSecretaria = () => {
     return (
         <div className='HomePage'>
             <div class="headerHomePage">
-            <img src="/Logo.PNG" alt="Logo" />
+                <img src="/Logo.PNG" alt="Logo" />
+                <div className="Userinfo">
+                    <UserinfoSecre />
+                </div>
             </div>
             {/* Span para abrir el menú con icono de 3 líneas */}
             <span onClick={toggleMenu} className="menu-icon">
@@ -185,13 +194,34 @@ export const HomePageInicio = () => {
     const [selectedServicio, setSelectedServicio] = useState(null);
     //especialistas
     const [especialistas, setEspecialistas] = useState([]);
+    const [isLogged, setIsLogged] = useState('');
+    const navigate=useNavigate();
 
     //home
     useEffect(() => {
         document.title = "Inicio"
         fetchSwipers();
+        checkLoginStatus();
     }, []);
+    const checkLoginStatus = () => {
+        const logged = localStorage.getItem('loggetUROSALUD') === 'true';
+        setIsLogged(logged);
+        console.log('loggetUROSALUD: ', logged);
+        if (logged) {
+            const userData = JSON.parse(localStorage.getItem('userUROSALUD'));
+            if (userData) {
+                const { role } = userData;
+                if (role === 'DOCTOR') {
+                    navigate('/HomePagesDoctor');
+                } else if (role === 'USER') {
+                    navigate('/citas');
+                } else if (role === 'SECRETARIA') {
+                    navigate('/HomePagesAdmin');
+                }
+            }
+        }
 
+    };
     const fetchSwipers = async () => {
         try {
             const response = await axios.get('http://localhost:8080/api/Swiper/get');
@@ -224,7 +254,7 @@ export const HomePageInicio = () => {
             console.log('especialista ', response)
             const usuariosFiltrados = response.data.filter(user => user.especialidad?.nombre && user.especialidad.nombre !== 'NA');
             setEspecialistas(usuariosFiltrados);
-            
+
         } catch (error) {
             console.error('Error al obtener los especialistas: ', error);
         }
@@ -236,11 +266,14 @@ export const HomePageInicio = () => {
     const closeModal = () => {
         setSelectedServicio(null);
     };
+    if (isLogged) {
+        return null; // o un spinner si quieres mostrar algo mientras se redirige
+    }
     return (
         <div className='HomePage'>
 
             <div class="headerHomePage">
-            <img src="/Logo.PNG" alt="Logo" />
+                <img src="/Logo.PNG" alt="Logo" />
                 <li className="servicio-HomePage">
                     <div className="servicio-HomePage-button">
                         <a href="#Servicios" className="servicio-HomePage-link">Servicios</a>

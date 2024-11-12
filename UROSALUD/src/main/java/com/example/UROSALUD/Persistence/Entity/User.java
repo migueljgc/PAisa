@@ -66,6 +66,10 @@ public class User implements UserDetails {
     @ManyToOne
     private Especialidad especialidad;
 
+    @Lob
+    @Column(name = "Imagen", columnDefinition = "LONGBLOB")
+    private byte[] img;
+
 
 
 

@@ -15,11 +15,11 @@ const Login = () => {
         checkLoginStatus();
     }, []);
     const checkLoginStatus = () => {
-        const logged = localStorage.getItem('logget') === 'true';
+        const logged = localStorage.getItem('loggetUROSALUD') === 'true';
         setIsLogged(logged);
-        console.log('Logget: ', logged);
+        console.log('loggetUROSALUD: ', logged);
         if (logged) {
-            const userData = JSON.parse(localStorage.getItem('user'));
+            const userData = JSON.parse(localStorage.getItem('userUROSALUD'));
             if (userData) {
                 const { role } = userData;
                 if (role === 'DOCTOR') {
@@ -37,7 +37,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/authenticate', {
+            const response = await axios.post('/api/auth/authenticate', {
                 identificacion,
                 password,
             });
@@ -47,15 +47,15 @@ const Login = () => {
                 console.log(responseData)
 
                 const { token, authorities } = response.data;
-                localStorage.setItem('token', token);
-                
-                const response1 = await axios.get('http://localhost:8080/api/auth/editar', {
+                localStorage.setItem('tokenUROSALUD', token);
+                console.log(token)
+                const response1 = await axios.get('/api/auth/editar', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 const user=response1.data.nombre;
-                localStorage.setItem('user', JSON.stringify({ user, role: authorities[0] })); // Assuming single role
+                localStorage.setItem('userUROSALUD', JSON.stringify({ user, role: authorities[0] })); // Assuming single role
                 const stateUser = response1.data.stateUser;
                 console.log(stateUser)
                 if (stateUser === 'INACTIVO') {
@@ -65,13 +65,13 @@ const Login = () => {
                 
                 if (authorities.includes('DOCTOR')) {
                     window.location.href = '/HomePagesDoctor';
-                    localStorage.setItem('logget', true);
+                    localStorage.setItem('loggetUROSALUD', true);
                 } else if (authorities.includes('USER')) {
                     window.location.href = '/citas';
-                    localStorage.setItem('logget', true);
+                    localStorage.setItem('loggetUROSALUD', true);
                 }  else if (authorities.includes('SECRETARIA')) {
                     window.location.href = '/HomePagesAdmin';
-                    localStorage.setItem('logget', true);
+                    localStorage.setItem('loggetUROSALUD', true);
                 }else {
 
                     window.location.href = '/';

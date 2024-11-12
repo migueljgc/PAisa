@@ -5,7 +5,7 @@
 
 .cuerpoServicio {
     display: flex;
-    height: 95vh;
+    height: 82.5vh;
 }
 
 .pieServicio {
@@ -20,57 +20,63 @@
     justify-content: center;
 }
 .crear-servicio{
-    width: 100%;
-    background-color: rgb(107, 174, 228) ;
+    background-color: #e6f3ff;
+    /* Azul claro */
+    border: 1px solid #b3d4fc;
+    /* Borde azul suave */
     border-radius: 8px;
-    padding-top: 1px;
-    padding-left: 10px;
-    padding-bottom: 1px;
+    /* Bordes redondeados */
+    padding: 20px;
+    /* Espacio interior */
+    margin: 10px;
+    /* Espacio exterior */
+    width: 800px;
+    /* Ancho del contenedor */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.crear-servicio-form {
-    width: 80%;
-    margin-left: 50px;
-}
 
 .form-crear-servicio h2 {
-    font-size: 3rem;
+    font-size: 30px;
+    justify-content: start;
 
 }
 
 .input-box-crear-servicio {
-    font-size: 1.5rem;
-    margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
+    font-size: 1rem !important;
+    margin-bottom: 8px;
 }
 
 .input-box-crear-servicio input,
 textarea, select {
-    margin-right: 150px;
-    width: 60%;
-    border-radius: 8px;
-    border: 0px;
-    background-color: #d6d8da;
-    border-radius: 8px;
-    font-size: 1.2rem;
+    width: 80% !important;
+    border-radius: 8px !important;
+    border: 0px !important;
+    background-color: #d6d8da !important;
+    border-radius: 8px !important;
+    padding: 8px 0px 8px 10px !important;
+    font-size: 0.9rem !important;
+    margin-right: 0px !important;
 }
 
 .input-file-crear-servicio input {
     padding-top: 10px;
     padding-left: 10px;
-    margin-top: 30px;
-    width: 87%;
-    height: 50px;
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
     border-radius: 8px;
     border: 0px;
     background-color: #d6d8da;
     border-radius: 8px;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
 }
 
 .btn-crear-servicio {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 30px;
     display: flex;
     justify-content: center;

@@ -40,10 +40,21 @@ public class ForgotPasswordController {
         String token = jwtService.genereteTokenEmail(user.getEmail());
 
         // Construir el enlace para restablecer la contraseña
-        String resetLink = "http://localhost:/reset-password/" + token;
+        String resetLink = "http://localhost:5173/reset-password/" + token;
 
         // Enviar correo electrónico con el enlace de restablecimiento
-        String message = String.format("<h1>Para restablecer tu contraseña, haz clic en este enlace: <h1/>" + "<a href=\"%s\">Restablecer Contraseña</a>",resetLink );
+        String message = String.format(
+                "<h1>¡Querido usuario! <h1/>" +
+                        "<p>Le confirmamos que hemos recibido su solicitud de restablecimiento de contraseña. Puede dirigirse al siguiente enlace y establecer una nueva contraseña" +
+                        "<br /><br />" +
+                        "<a href=\"%s\">Restablecer Contraseña</a>"+
+                "Este correo fue enviado automáticamente, agradecemos no responder este mensaje." +
+                        "<br /><br />" +
+                        "Gracias por su atención" +
+                        "<br /><br />" +
+                        "Coordialmente<br /><br />" +
+                        "Equipo Uros.<br /><br />"
+                ,resetLink );
         emailService.sendEmails(
                 new String[]{Email},
                 "Recuperación de contraseña",
@@ -61,6 +72,17 @@ public class ForgotPasswordController {
         if (jwtService.validateTokenForPasswordReset(token)) {
             String email = jwtService.getUserName(token);
             userService.resetPassword(email, newPassword);
+            String message = String.format(
+            "<h1>¡Querido usuario! <h1/>" +
+                    "<p>Tú contraseña ha sido restablecida con éxito." +
+                    "<br /><br />" +
+                    "Coordialmente<br /><br />" +
+                    "Equipo Uros.<br /><br />"
+                    );
+            emailService.sendEmails(
+                    new String[]{email},
+                    "Restablecimiento exitoso",
+                    message);
             return ResponseEntity.ok("Contraseña restablecida exitosamente.");
         } else {
             return ResponseEntity.badRequest().body("El enlace de restablecimiento de contraseña es inválido o ha expirado.");

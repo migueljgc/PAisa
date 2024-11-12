@@ -1,24 +1,28 @@
-            
+
 import React, { useEffect, useState } from 'react';
 import PiePagina from '../../Componentes/PiePagina';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { AccesoDoc } from '../../Componentes/Header';
+import { SubirArchivo, SubirArchivoExamen } from './SubirArchivo';
 
 const VerCitas = () => {
     const [cita, setCita] = useState([]);
     const [filterText, setFilterText] = useState(''); // Estado para el texto de búsqueda
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisibleExamen, setModalVisibleExamen] = useState(false);
+    const [currentUpload, setCurrentUpload] = useState(null);
 
     useEffect(() => {
         const fechtPqrsd = async () => {
-            const response = await axios.get('http://localhost:8080/api/Citas/get')
+            const response = await axios.get('/api/Citas/get')
             console.log(response)
             const token = localStorage.getItem('token');
             const response1 = await axios.get('/api/auth/editar', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });console.log(response1)
+            }); console.log(response1)
             const usuario = response1.data.identificacion;
             console.log(usuario);
 
@@ -37,18 +41,124 @@ const VerCitas = () => {
     );
 
 
-    // Definir las columnas de la tabla
     const columns = [
         { name: 'ID cita', selector: row => row.id, sortable: true },
         { name: 'Paciente', selector: row => row.paciente.name, sortable: true },
         { name: 'Fecha', selector: row => row.fecha, sortable: true },
         { name: 'Hora', selector: row => row.hora, sortable: true },
-        { name: 'Historia clínica', cell: row => <button className="upload-button">Cargar archivo</button> },
-        { name: 'Exámenes', cell: row => <button className="upload-button">Cargar archivo</button> }
+        {
+            name: 'Historia clínica',
+            cell: row => (
+                <span>
+                    {row.historiaClinica ? (
+                        <button
+                            className="download-button"
+                            onClick={() => handleDownload(row.historiaClinica)}
+                        >
+                            Descargar archivo
+                        </button>
+                    ) : (
+                        <button
+                            className="upload-button"
+                            onClick={() => openModal(row.id, 'historiaClinica')}
+                        >
+                            Cargar archivo
+                        </button>
+                    )}
+                </span>
+            )
+        },
+        {
+            name: 'Exámenes',
+            cell: row => (
+                <span>
+                    {row.examenes ? (
+                        <button
+                            className="download-button"
+                            onClick={() => handleDownload(row.examenes)}
+                        >
+                            Descargar archivo
+                        </button>
+                    ) : (
+                        <button
+                            className="upload-button"
+                            onClick={() => openModalExamen(row.id, 'examenes')}
+                        >
+                            Cargar archivo
+                        </button>
+                    )}
+                </span>
+            )
+        }
     ];
+
+
+    const openModal = (id, type) => {
+        setCurrentUpload({ id, type });
+        setModalVisible(true);
+    };
+    const openModalExamen = (id, type) => {
+        setCurrentUpload({ id, type });
+        setModalVisibleExamen(true);
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setModalVisibleExamen(false);
+        setCurrentUpload(null);
+    };
+
+    // Función para subir el archivo de historia clínica
+    const handleUploadHistoria = async (event) => {
+        const file = event.target.files[0];
+        if (!file || !currentUpload) return;
+
+        const formData = new FormData();
+        formData.append('archivo', file);
+
+        try {
+            await axios.put(`/api/Citas/updateHistoria/${currentUpload.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            alert("Historia clínica subida exitosamente.");
+            closeModal(); // Cerrar el modal después de subir el archivo
+        } catch (error) {
+            console.error("Error al subir la historia clínica:", error);
+            alert("Hubo un error al subir la historia clínica.");
+        }
+    };
+
+    // Función para subir el archivo de exámenes
+    const handleUploadExamen = async (event) => {
+        const file = event.target.files[0];
+        if (!file || !currentUpload) return;
+
+        const formData = new FormData();
+        formData.append('archivo', file);
+
+        try {
+            await axios.put(`/api/Citas/updateExamen/${currentUpload.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            alert("Examen subido exitosamente.");
+            closeModal(); // Cerrar el modal después de subir el archivo
+        } catch (error) {
+            console.error("Error al subir el examen:", error);
+            alert("Hubo un error al subir el examen.");
+        }
+    };
+
+
+    const handleDownload = (fileUrl) => {
+        window.open(fileUrl, '_blank');
+    };
     return (
         <div>
-            <AccesoDoc/>
+            <AccesoDoc />
             <div className="ver-cita">
 
                 <div className="tabla-cita">
@@ -71,22 +181,19 @@ const VerCitas = () => {
                         customStyles={{
                             headCells: {
                                 style: {
-                                    backgroundColor: '#89ceff', 
+                                    backgroundColor: '#89ceff',
                                     color: 'black',
                                     fontSize: '1.2rem',
                                 },
                             },
                             rows: {
-                                style: {
-                                    backgroundColor: '#89ceff', 
-                                },
                                 highlightOnHoverStyle: {
-                                    backgroundColor: '#ffc0cb', 
+                                    backgroundColor: '#ffc0cb',
                                 },
                             },
                             cells: {
                                 style: {
-                                    borderRight: '3px solid blue', 
+                                    borderRight: '3px solid blue',
                                 },
                             },
                             tableWrapper: {
@@ -104,6 +211,12 @@ const VerCitas = () => {
             <div className="pieHomePage">
                 <PiePagina />
             </div>
+            {modalVisible && (
+                <SubirArchivo onClose={closeModal} onUpload={handleUploadHistoria} />
+            )}
+            {modalVisibleExamen && (
+                <SubirArchivoExamen onClose={closeModal} onUpload={handleUploadExamen} />
+            )}
         </div>
     );
 }

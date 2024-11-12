@@ -10,17 +10,17 @@ export const Recovery = () => {
     const navigate = useNavigate();
 
     const checkLoginStatus = () => {
-        const logged = localStorage.getItem('logget') === 'true';
+        const logged = localStorage.getItem('loggetUROSALUD') === 'true';
         setIsLogged(logged);
-        console.log('Logget: ', logged);
+        console.log('LoggetUROSALUD: ', logged);
         if (logged) {
-            const userData = JSON.parse(localStorage.getItem('user'));
+            const userData = JSON.parse(localStorage.getItem('userUROSALUD'));
             if (userData) {
                 const { role } = userData;
                 if (role === 'DOCTOR') {
                     navigate('/HomePagesDoctor');
                 } else if (role === 'USER') {
-                    navigate('/HomePages');
+                    navigate('/citas');
                 } else if (role === 'SECRETARIA') {
                     navigate('/HomePagesAdmin');
                 }
@@ -37,7 +37,7 @@ export const Recovery = () => {
     const handleResetRequest = async () => {
         try {
             console.log(email);
-            const response = await axios.post('forgot-password/email', { email });
+            const response = await axios.post('/forgot-password/email', { email });
             alert("Éxito");
             setEmail('')
             return;

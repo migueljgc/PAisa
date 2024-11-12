@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Excluir los endpoints de autenticación y registro
         String requestURI = request.getRequestURI();
-        if (requestURI.equals("/api/auth/authenticate") || requestURI.equals("/api/auth/register")) {
+        if (requestURI.equals("/api/auth/authenticate") || requestURI.equals("/api/auth/register") ) {
             filterChain.doFilter(request, response);
             return;
         }

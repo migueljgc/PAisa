@@ -51,7 +51,27 @@ public class AuthController {
     public ResponseEntity<User> getCurrentUser(Authentication authentication) {
         return ResponseEntity.ok(authService.getCurrentUser(authentication));
     }
+    @GetMapping("/buscar")
+    public ResponseEntity<User> getBuscarUser(Authentication authentication) {
+        return ResponseEntity.ok(authService.getCurrentUser(authentication));
+    }
+    @GetMapping("/verify-email")
+    public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {
+        try {
+            if (jwtService.validateToken(token)) {
+                String username = jwtService.getUserName(token);
+                userService.verifyUser(username); // Implementa la lógica para marcar al usuario como verificado
+                return ResponseEntity.ok("Correo electrónico verificado correctamente.");
+            } else {
+                return ResponseEntity.badRequest().body("Enlace de verificación inválido o expirado.");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return ResponseEntity.internalServerError().body("error"+e);
+        }
 
+    }
 
 
 }

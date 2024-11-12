@@ -16,7 +16,7 @@ public class UsuarioDto {
     private String lastName;
     private String email;
     private String direccion;
-    private String identificationNumber;
+    private String identificacion;
     private BigInteger number;
     private String stateUser;
     private Role role;
