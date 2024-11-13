@@ -50,13 +50,10 @@ const VerCitas = () => {
             name: 'Historia clínica',
             cell: row => (
                 <span>
-                    {row.historiaClinica ? (
-                        <button
-                            className="download-button"
-                            onClick={() => handleDownload(row.historiaClinica)}
-                        >
-                            Descargar archivo
-                        </button>
+                    {row.archivoAnswerHistoria ? (
+                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                            <button className='upload-button'>Descargar archivo</button>
+                        </a>
                     ) : (
                         <button
                             className="upload-button"
@@ -72,13 +69,10 @@ const VerCitas = () => {
             name: 'Exámenes',
             cell: row => (
                 <span>
-                    {row.examenes ? (
-                        <button
-                            className="download-button"
-                            onClick={() => handleDownload(row.examenes)}
-                        >
-                            Descargar archivo
-                        </button>
+                    {row.archivoAnswerMedica ? (
+                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split(/[/\\]/).pop())}`} download target="_blank" rel="noopener noreferrer">
+                            <button className='upload-button'>Descargar archivo</button>
+                        </a>
                     ) : (
                         <button
                             className="upload-button"
@@ -91,6 +85,7 @@ const VerCitas = () => {
             )
         }
     ];
+
 
 
     const openModal = (id, type) => {
@@ -109,20 +104,22 @@ const VerCitas = () => {
     };
 
     // Función para subir el archivo de historia clínica
-    const handleUploadHistoria = async (event) => {
-        const file = event.target.files[0];
+    const handleUploadHistoria = async (file) => {
         if (!file || !currentUpload) return;
 
         const formData = new FormData();
         formData.append('archivo', file);
 
         try {
-            await axios.put(`/api/Citas/updateHistoria/${currentUpload.id}`, formData, {
+            const response = await axios.put(`/api/Citas/updateHistoria/${currentUpload.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            console.log("Historia clínica subida exitosamente.", response)
             alert("Historia clínica subida exitosamente.");
+            window.location.reload();
+
             closeModal(); // Cerrar el modal después de subir el archivo
         } catch (error) {
             console.error("Error al subir la historia clínica:", error);
@@ -131,8 +128,7 @@ const VerCitas = () => {
     };
 
     // Función para subir el archivo de exámenes
-    const handleUploadExamen = async (event) => {
-        const file = event.target.files[0];
+    const handleUploadExamen = async (file) => {
         if (!file || !currentUpload) return;
 
         const formData = new FormData();
@@ -145,6 +141,7 @@ const VerCitas = () => {
                 },
             });
             alert("Examen subido exitosamente.");
+            window.location.reload();
             closeModal(); // Cerrar el modal después de subir el archivo
         } catch (error) {
             console.error("Error al subir el examen:", error);
@@ -153,9 +150,6 @@ const VerCitas = () => {
     };
 
 
-    const handleDownload = (fileUrl) => {
-        window.open(fileUrl, '_blank');
-    };
     return (
         <div>
             <AccesoDoc />

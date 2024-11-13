@@ -16,6 +16,7 @@ public class UsuarioMapper {
         user.setLastName(userDTO.getLastName());
         user.setRole(userDTO.getRole());
         user.setEspecialidad(userDTO.getEspecialidad());
+        user.setImg(userDTO.getImg());
         return user;
     }
 
@@ -29,6 +30,7 @@ public class UsuarioMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setRole(user.getRole());
         userDTO.setEspecialidad(user.getEspecialidad());
+        userDTO.setImg(user.getImg());
         return userDTO;
     }
 }

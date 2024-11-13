@@ -8,6 +8,7 @@ const CrearUsuario = () => {
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [identificationTypes, setIdentificationTypes] = useState([]);
+    const [especialidadesTypes, setEspecialidadesTypes] = useState([]);
     const [generosTypes, setGenerosTypes] = useState([]);
     const [formData, setFormData] = useState({
         nombre: '',
@@ -42,10 +43,20 @@ const CrearUsuario = () => {
                 console.log('Tipos de generos obtenidos:', response.data);
                 setGenerosTypes(response.data);
             } catch (error) {
-                console.error('Error al obtener tipos de identificación de la base de datos', error);
+                console.error('Error al obtener tipos de generos de la base de datos', error);
+            }
+        };
+        const fetchEspecialidadesTypes = async () => {
+            try {
+                const response = await axios.get('/api/Especialidad/get');
+                console.log('Tipos de especialidades obtenidos:', response.data);
+                setEspecialidadesTypes(response.data);
+            } catch (error) {
+                console.error('Error al obtener tipos de especialidades de la base de datos', error);
             }
         };
 
+        fetchEspecialidadesTypes();
         fetchIdentificationTypes();
         fetchGeneroTypes();
     }, []);
@@ -108,6 +119,7 @@ const CrearUsuario = () => {
 
             const selectedIdentificationType = identificationTypes.find(type => type.id === parseInt(formData.tipoIdentificacion));
             const selectedGenerosType = generosTypes.find(type => type.id === parseInt(formData.genero));
+            const selectedEspecialidadType = especialidadesTypes.find(type => type.id === parseInt(formData.especialidad));
             if (formData.contraseña === formData.confirmarContraseña) {
                 const userResponse = await axios.post('/api/auth/register', {
                     name: formData.nombre,
@@ -119,7 +131,8 @@ const CrearUsuario = () => {
                     number: parseInt(formData.numero),
                     genero: { id: selectedGenerosType.id },
                     direccion: formData.direccion,
-                    rol: ''
+                    role: formData.rol,
+                    especialidad: {id: parseInt(formData.especialidad)}
                 });
                 alert('Usuario Registrado');
                 console.log('Respuesta al guardar usuario:', userResponse.data);
@@ -216,7 +229,7 @@ const CrearUsuario = () => {
                                         onChange={handleChange} required
                                     >
                                         <option key="" value="">Seleccione el rol</option>
-                                        <option key="ADMIN" value="ADMIN">ADMIN</option>
+                                        <option key="DOCTOR" value="DOCTOR">DOCTOR</option>
                                         <option key="SECRETARIA" value="SECRETARIA">SECRETARIA</option>
                                     </select>
                                 </div>
@@ -264,6 +277,27 @@ const CrearUsuario = () => {
                                     />
                                     {confirmPasswordError && <div className='errore'> {confirmPasswordError}</div>}
                                 </div>
+                                {/* Mostrar especialidad solo si el rol es DOCTOR */}
+                                {formData.rol === 'DOCTOR' && (
+                                    <div className="labelsAndInputs">
+                                        <label>Especialidad</label>
+                                        <select
+                                            className="Selects"
+                                            id="especialidad"
+                                            name="especialidad"
+                                            value={formData.especialidad}
+                                            onChange={handleChange}
+                                            required
+                                        >
+                                            <option value="">Seleccione Especialidad</option>
+                                            {especialidadesTypes.map((type) => (
+                                                <option key={type.id} value={type.id}>
+                                                    {type.descripcion}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
                             </div>
 
                         </div>

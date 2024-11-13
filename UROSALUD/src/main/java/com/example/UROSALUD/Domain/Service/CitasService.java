@@ -2,6 +2,7 @@ package com.example.UROSALUD.Domain.Service;
 
 import com.example.UROSALUD.Domain.Dto.CitasDTO;
 import com.example.UROSALUD.Domain.Mapper.CitasMapper;
+import com.example.UROSALUD.Persistence.Entity.Citas;
 import com.example.UROSALUD.Persistence.Entity.Horario;
 import com.example.UROSALUD.Persistence.Repository.CitasRepository;
 import com.example.UROSALUD.Persistence.Repository.HorarioRepository;
@@ -34,7 +35,36 @@ public class CitasService {
         citasRepository.save(CitasMapper.toEntity(citasDTO));
         return citasDTO;
     }
+    public CitasDTO saveHistoria(CitasDTO citasDTO) {
+        Optional<Citas> existingCitasOptional = citasRepository.findById(citasDTO.getId());
+        if (existingCitasOptional.isPresent()) {
+            Citas existingCitas = existingCitasOptional.get();
+            // Actualizar los campos relevantes de la solicitud existente con los valores de requestDTO
 
+            existingCitas.setArchivoAnswerHistoria(citasDTO.getArchivoAnswerHistoria());
+            // Actualizar otros campos si es necesario
+            // Guardar los cambios en la base de datos
+            Citas savedCitas = citasRepository.save(existingCitas);
+
+            // Devolver el DTO con los datos actualizados
+            return CitasMapper.toDto(savedCitas);
+
+        } return null;
+    }
+    public CitasDTO saveExamen(CitasDTO citasDTO) {
+        Optional<Citas> existingCitasOptional = citasRepository.findById(citasDTO.getId());
+        if (existingCitasOptional.isPresent()) {
+            Citas existingCitas = existingCitasOptional.get();
+            // Actualizar los campos relevantes de la solicitud existente con los valores de requestDTO
+
+            existingCitas.setArchivoAnswerMedica(citasDTO.getArchivoAnswerMedica());
+            // Actualizar otros campos si es necesario
+            Citas savedCitas = citasRepository.save(existingCitas);
+
+            // Devolver el DTO con los datos actualizados
+            return CitasMapper.toDto(savedCitas);
+        } return null;
+    }
     public boolean reservarCita(Long doctorId, LocalTime hora) {
         Optional<Horario> horario = horarioRepository.findByDoctorIdAndHora(doctorId, hora);
         if (horario.isPresent() && horario.get().reservarCita()) {

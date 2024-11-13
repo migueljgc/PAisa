@@ -140,11 +140,6 @@ export const HeaderDoctor = () => {
           </li>
 
 
-          <li className="list__item">
-            <div className="list__button">
-              <a href="#" className="nav__link">Mis Pacientes</a>
-            </div>
-          </li>
 
           <li className="list__item">
             <div className="list__button">

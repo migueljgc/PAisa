@@ -5,7 +5,11 @@ import com.example.UROSALUD.Domain.Service.CitasService;
 import com.example.UROSALUD.Persistence.Entity.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -66,24 +70,17 @@ public class CitasController {
         }
     }
 
+    // Endpoint para actualizar la historia clínica
     @PutMapping("/updateHistoria/{id}")
     public ResponseEntity<?> updateHistoria(@PathVariable Long id, @RequestPart(value = "archivo", required = true) MultipartFile archivo) {
-        return actualizarArchivo(id, archivo, "Historia");
-    }
-
-    @PutMapping("/updateExamen/{id}")
-    public ResponseEntity<?> updateExamen(@PathVariable Long id, @RequestPart(value = "archivo", required = true) MultipartFile archivo) {
-        return actualizarArchivo(id, archivo, "Examen");
-    }
-
-    private ResponseEntity<?> actualizarArchivo(Long id, MultipartFile archivo, String tipoActualizacion) {
         Optional<CitasDTO> citasDTOOptional = citasService.findById(id);
+
         if (citasDTOOptional.isPresent()) {
             CitasDTO existingCitas = citasDTOOptional.get();
 
             if (archivo != null && !archivo.isEmpty()) {
                 try {
-                    // Si la carpeta no existe, se crea
+                    // Crear directorio si no existe
                     Files.createDirectories(Paths.get(uploadDir));
 
                     // Generar un nombre único para el archivo
@@ -91,23 +88,79 @@ public class CitasController {
                     Path targetLocation = Paths.get(uploadDir).resolve(uniqueFileName);
                     Files.copy(archivo.getInputStream(), targetLocation);
 
-                    // Establecer la URL del archivo según el tipo de actualización
-                    if ("Historia".equals(tipoActualizacion)) {
-                        existingCitas.setArchivoAnswerHistoria(targetLocation.toString());
-                    } else if ("Examen".equals(tipoActualizacion)) {
-                        existingCitas.setArchivoAnswerMedica(targetLocation.toString());
-                    }
+                    // Guardar la ruta del archivo en la historia clínica
+                    existingCitas.setArchivoAnswerHistoria(targetLocation.toString());
+
+                    // Guardar en la base de datos
+                    CitasDTO updatedCitasDTO = citasService.saveHistoria(existingCitas);
+                    System.out.println(updatedCitasDTO);
+                    return ResponseEntity.ok(updatedCitasDTO);
 
                 } catch (IOException e) {
                     System.out.println(e);
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar el archivo: " + e.getMessage());
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body("Error al procesar el archivo de historia clínica: " + e.getMessage());
                 }
             }
-
-            CitasDTO updatedCitasDTO = citasService.save(existingCitas);
-            return ResponseEntity.ok(updatedCitasDTO);
         }
         return ResponseEntity.notFound().build();
     }
 
+    // Endpoint para actualizar el examen médico
+    @PutMapping("/updateExamen/{id}")
+    public ResponseEntity<?> updateExamen(@PathVariable Long id, @RequestPart(value = "archivo", required = true) MultipartFile archivo) {
+        Optional<CitasDTO> citasDTOOptional = citasService.findById(id);
+
+        if (citasDTOOptional.isPresent()) {
+            CitasDTO existingCitas = citasDTOOptional.get();
+
+            if (archivo != null && !archivo.isEmpty()) {
+                try {
+                    // Crear directorio si no existe
+                    Files.createDirectories(Paths.get(uploadDir));
+
+                    // Generar un nombre único para el archivo
+                    String uniqueFileName = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
+                    Path targetLocation = Paths.get(uploadDir).resolve(uniqueFileName);
+                    Files.copy(archivo.getInputStream(), targetLocation);
+
+                    // Guardar la ruta del archivo en el examen médico
+                    existingCitas.setArchivoAnswerMedica(targetLocation.toString());
+
+                    // Guardar en la base de datos
+                    CitasDTO updatedCitasDTO = citasService.saveExamen(existingCitas);
+                    System.out.println(updatedCitasDTO);
+                    return ResponseEntity.ok(updatedCitasDTO);
+
+                } catch (IOException e) {
+                    System.out.println(e);
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body("Error al procesar el archivo de examen médico: " + e.getMessage());
+                }
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/download/{filename}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
+        try {
+            Path filePath = Paths.get(uploadDir).resolve(filename);
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.valueOf(Files.probeContentType(filePath)))
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
+
+

@@ -52,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 .identificacion(request.getIdentificacion())
                 .tiposIdentificacion(request.getTiposIdentificacion())
                 .number(request.getNumber())
+                .especialidad(request.getEspecialidad())
                 .build();
         userRepository.save(user);
         // Generar los horarios si el rol es doctor

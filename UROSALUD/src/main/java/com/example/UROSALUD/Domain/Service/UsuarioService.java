@@ -7,8 +7,12 @@ import com.example.UROSALUD.Persistence.Entity.User;
 import com.example.UROSALUD.Persistence.Repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +84,29 @@ public class UsuarioService {
             usuarioRepository.save(user);
         } else {
             throw new RuntimeException("Usuario no encontrado");
+        }
+    }
+
+    public void updateProfileImage(MultipartFile image) throws Exception {
+        // Obtener el usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username;
+
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            username = ((UserDetails) authentication.getPrincipal()).getUsername();
+        } else {
+            username = authentication.getPrincipal().toString();
+        }
+
+        // Buscar al usuario en la base de datos
+        Optional<User> optionalUser = usuarioRepository.findUserByIdentificacion(username);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setImg(image.getBytes()); // Actualizar la imagen
+            usuarioRepository.save(user);
+        } else {
+            throw new Exception("Usuario no encontrado");
         }
     }
 }

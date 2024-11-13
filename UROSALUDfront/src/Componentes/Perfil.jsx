@@ -12,18 +12,19 @@ export const Perfil = () => {
         name: '',
         lastName: '',
         email: '',
-        genero: {id:'', descricion: '' },
+        genero: { id: '', descricion: '' },
         password: '',
         identificacion: '',
         number: '',
         direccion: '',
-        tiposIdentificacion: { id:'', descripcion: '' },
+        tiposIdentificacion: { id: '', descripcion: '' },
         img: '',
         role: '',
         id: ''
     });
     const [isEditModalOpen, setEditModalOpen] = useState(false);
     const [editedUser, setEditedUser] = useState({ ...user });
+    const [showUploadOption, setShowUploadOption] = useState(false);
 
     const fetchUserAndOptions = async () => {
         try {
@@ -109,13 +110,32 @@ export const Perfil = () => {
     const handleEditSubmit = async () => {
         try {
             console.log(editedUser)
-            const respondse= await axios.put('/api/Usuario/perfil/update', editedUser);
+            const respondse = await axios.put('/api/Usuario/perfil/update', editedUser);
             setUser(editedUser);
             console.log(respondse)
             alert('exito')
+            window.location.reload();
             closeEditModal();
         } catch (error) {
             console.error('Error updating user data', error);
+        }
+    };
+
+    const handleImageChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+
+                await axios.post('/api/Usuario/perfil/update-image', formData);
+                alert('Imagen actualizada con éxito');
+                window.location.reload();
+            } catch (error) {
+                console.error('Error updating profile image', error);
+                alert('Error al actualizar la imagen');
+            }
         }
     };
 
@@ -123,8 +143,22 @@ export const Perfil = () => {
         <div>
             {renderHeader()}
             <div className="perfil">
-                <div className="Perfil">
+                <div className="Perfil" onMouseEnter={() => setShowUploadOption(true)}
+                    onMouseLeave={() => setShowUploadOption(false)}>
                     <img src={profileImage} alt="Foto de perfil" className='perfil-imagen' />
+                    {showUploadOption && (
+                        <div className="upload-option">
+                            <label htmlFor="file-upload" className="custom-file-upload">
+                                    Cambiar Foto
+                                </label>
+                                <input
+                                    id="file-upload"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                />
+                           </div>
+                    )}
                     <p>Hola, {user.name}</p>
                 </div>
                 <div className="info-perfil">

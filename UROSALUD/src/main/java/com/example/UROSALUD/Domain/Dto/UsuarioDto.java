@@ -23,4 +23,5 @@ public class UsuarioDto {
     private Genero genero;
     private Especialidad especialidad;
     private TiposIdentificacion tiposIdentificacion;
+    private byte[] img;
 }

@@ -64,7 +64,8 @@ import java.util.List;
                 new AntPathRequestMatcher("/api/tipoSolicitud/**"),
                 new AntPathRequestMatcher("/api/Swiper/get"),
                 new AntPathRequestMatcher("/api/Servicio/get"),
-                new AntPathRequestMatcher("/api/Usuario/get")
+                new AntPathRequestMatcher("/api/Usuario/get"),
+                new AntPathRequestMatcher("/forgot-password/**")
 
         );
     }

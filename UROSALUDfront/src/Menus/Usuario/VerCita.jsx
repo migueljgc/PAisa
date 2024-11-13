@@ -48,13 +48,10 @@ const VerCita = () => {
             name: 'Historia clínica',
             cell: row => (
                 <span>
-                    {row.historiaClinica ? (
-                        <button
-                            className="upload-button"
-                            onClick={() => handleDownload(row.historiaClinica)}
-                        >
-                            Descargar archivo
-                        </button>
+                    {row.archivoAnswerHistoria ? (
+                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                            <button className='upload-button'>Descargar archivo</button>
+                        </a>
                     ) : (
                         <p>No Disponible</p>
                     )}
@@ -65,13 +62,10 @@ const VerCita = () => {
             name: 'Exámenes',
             cell: row => (
                 <span>
-                    {row.examenes ? (
-                        <button
-                            className="upload-button"
-                            onClick={() => handleDownload(row.examenes)}
-                        >
-                            Descargar archivo
-                        </button>
+                    {row.archivoAnswerMedica ? (
+                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                            <button className='upload-button'>Descargar archivo</button>
+                        </a>
                     ) : (
                         <p>No Disponible</p>
                     )}
