@@ -49,7 +49,7 @@ const VerCita = () => {
             cell: row => (
                 <span>
                     {row.archivoAnswerHistoria ? (
-                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                        <a href={`http://localhost:8080/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                             <button className='upload-button'>Descargar archivo</button>
                         </a>
                     ) : (
@@ -63,7 +63,7 @@ const VerCita = () => {
             cell: row => (
                 <span>
                     {row.archivoAnswerMedica ? (
-                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                        <a href={`http://localhost:8080/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                             <button className='upload-button'>Descargar archivo</button>
                         </a>
                     ) : (

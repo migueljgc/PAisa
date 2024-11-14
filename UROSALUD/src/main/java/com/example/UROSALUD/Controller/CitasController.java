@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -80,13 +81,23 @@ public class CitasController {
 
             if (archivo != null && !archivo.isEmpty()) {
                 try {
-                    // Crear directorio si no existe
+                    //Si la Carpeta no Existe se crea
+                    //Files.createDirectories(fileStorageLocation);
                     Files.createDirectories(Paths.get(uploadDir));
 
-                    // Generar un nombre único para el archivo
-                    String uniqueFileName = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
+                    // Guardar el archivo
+                    String fileName = archivo.getOriginalFilename();
+                    System.out.println(fileName);
+
+                    // Generar un nombre único para el archivo (ejemplo con timestamp)
+                    String uniqueFileName = System.currentTimeMillis() + "_" + fileName;
+                    System.out.println(uniqueFileName);
+
                     Path targetLocation = Paths.get(uploadDir).resolve(uniqueFileName);
-                    Files.copy(archivo.getInputStream(), targetLocation);
+                    System.out.println("target"+targetLocation);
+
+                    // Asegúrate de usar `StandardCopyOption.REPLACE_EXISTING` para evitar problemas de sobrescritura
+                    Files.copy(archivo.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
                     // Guardar la ruta del archivo en la historia clínica
                     existingCitas.setArchivoAnswerHistoria(targetLocation.toString());
@@ -116,13 +127,23 @@ public class CitasController {
 
             if (archivo != null && !archivo.isEmpty()) {
                 try {
-                    // Crear directorio si no existe
+                    //Si la Carpeta no Existe se crea
+                    //Files.createDirectories(fileStorageLocation);
                     Files.createDirectories(Paths.get(uploadDir));
 
-                    // Generar un nombre único para el archivo
-                    String uniqueFileName = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
+                    // Guardar el archivo
+                    String fileName = archivo.getOriginalFilename();
+                    System.out.println(fileName);
+
+                    // Generar un nombre único para el archivo (ejemplo con timestamp)
+                    String uniqueFileName = System.currentTimeMillis() + "_" + fileName;
+                    System.out.println(uniqueFileName);
+
                     Path targetLocation = Paths.get(uploadDir).resolve(uniqueFileName);
-                    Files.copy(archivo.getInputStream(), targetLocation);
+                    System.out.println("target"+targetLocation);
+
+                    // Asegúrate de usar `StandardCopyOption.REPLACE_EXISTING` para evitar problemas de sobrescritura
+                    Files.copy(archivo.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
                     // Guardar la ruta del archivo en el examen médico
                     existingCitas.setArchivoAnswerMedica(targetLocation.toString());
@@ -145,21 +166,22 @@ public class CitasController {
     @GetMapping("/download/{filename}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
         try {
-            Path filePath = Paths.get(uploadDir).resolve(filename);
+            Path filePath = Paths.get(uploadDir).resolve(filename).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
-            if (resource.exists()) {
-                return ResponseEntity.ok()
-                        .contentType(MediaType.valueOf(Files.probeContentType(filePath)))
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
+                if (resource.exists()) {
+                    return ResponseEntity.ok()
+                            .contentType(MediaType.valueOf(Files.probeContentType(filePath)))
+                            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                            .body(resource);
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
+        } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
 }
 

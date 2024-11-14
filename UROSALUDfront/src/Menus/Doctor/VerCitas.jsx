@@ -51,7 +51,7 @@ const VerCitas = () => {
             cell: row => (
                 <span>
                     {row.archivoAnswerHistoria ? (
-                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
+                        <a href={`http://localhost:8080/api/Citas/download/${encodeURIComponent(row.archivoAnswerHistoria.split('\\').pop())}`} download target="_blank" rel="noopener noreferrer">
                             <button className='upload-button'>Descargar archivo</button>
                         </a>
                     ) : (
@@ -70,7 +70,7 @@ const VerCitas = () => {
             cell: row => (
                 <span>
                     {row.archivoAnswerMedica ? (
-                        <a href={`/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split(/[/\\]/).pop())}`} download target="_blank" rel="noopener noreferrer">
+                        <a href={`http://localhost:8080/api/Citas/download/${encodeURIComponent(row.archivoAnswerMedica.split(/[/\\]/).pop())}`} download target="_blank" rel="noopener noreferrer">
                             <button className='upload-button'>Descargar archivo</button>
                         </a>
                     ) : (
@@ -108,7 +108,11 @@ const VerCitas = () => {
         if (!file || !currentUpload) return;
 
         const formData = new FormData();
-        formData.append('archivo', file);
+        const archivo =file
+        if (archivo !== null) {
+            formData.append('archivo', archivo);
+            console.log(archivo)
+        };
 
         try {
             const response = await axios.put(`/api/Citas/updateHistoria/${currentUpload.id}`, formData, {
